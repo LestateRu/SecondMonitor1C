@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:second_monitor/Service/VideoManager.dart';
 import 'package:window_manager/window_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:qr_flutter/qr_flutter.dart';
@@ -7,7 +8,8 @@ import 'package:second_monitor/Model/CheckItem.dart';
 import 'package:second_monitor/Model/LoyaltyProgram.dart';
 import 'package:second_monitor/Model/PaymentQRCode.dart';
 import 'package:second_monitor/Model/Summary.dart';
-import 'package:video_player/video_player.dart';
+import 'package:second_monitor/Model/Brend.dart'; // Добавляем импорт нового класса
+import 'package:video_player_win/video_player_win.dart';
 import 'dart:io';
 
 class SecondMonitor extends StatefulWidget {
@@ -21,9 +23,9 @@ class _SecondMonitorState extends State<SecondMonitor> {
   Summary? _summary;
   List<CheckItem> _checkItems = [];
   PaymentQRCode? _paymentQRCode;
+  Brend? _brend; // Новое поле для хранения информации о бренде
 
-  late VideoPlayerController _videoController;
-  bool _isVideoInitialized = false;
+  late VideoManager _videoManager;
 
   @override
   void initState() {
@@ -35,6 +37,7 @@ class _SecondMonitorState extends State<SecondMonitor> {
     _webSocketService.connect('ws://localhost:8080/ws/');
 
     // Инициализация видеоплеера
+    _videoManager = VideoManager();
     _initializeVideo();
 
     // Полноэкранный режим
@@ -44,21 +47,14 @@ class _SecondMonitorState extends State<SecondMonitor> {
   void _initFullScreen() async {
     await windowManager.ensureInitialized();
     windowManager.waitUntilReadyToShow().then((_) async {
-      await windowManager
-          .setFullScreen(true); // Устанавливаем полноэкранный режим
+      await windowManager.setFullScreen(false);
     });
   }
 
   void _initializeVideo() {
-    _videoController = VideoPlayerController.file(
-      File('C:\\video\\sample_video.mp4'), // Убедитесь, что путь корректный
-    )..initialize().then((_) {
-        setState(() {
-          _isVideoInitialized = true;
-          _videoController.play();
-          _videoController.setLooping(true);
-        });
-      });
+    _videoManager.initialize('C:\\video\\2.mp4').then((_) {
+      setState(() {});
+    });
   }
 
   // Callback для получения данных через WebSocket
@@ -76,42 +72,46 @@ class _SecondMonitorState extends State<SecondMonitor> {
 
       var checkItems = jsonData['checkItems'] != null
           ? List<CheckItem>.from(
-              jsonData['checkItems'].map((item) => CheckItem.fromJson(item)))
-          : <CheckItem>[]; // Пустой список, если данных нет
+          jsonData['checkItems'].map((item) => CheckItem.fromJson(item)))
+          : <CheckItem>[];
 
       var paymentQRCode = jsonData['paymentQRCode'] != null &&
-              jsonData['paymentQRCode']['qrCodeData'] != null
+          jsonData['paymentQRCode']['qrCodeData'] != null
           ? PaymentQRCode.fromJson(jsonData['paymentQRCode'])
           : null;
+
+      var brend = jsonData['brend'] != null
+          ? Brend.fromJson(jsonData['brend'])
+          : null;
+
+      print("Received CheckItems: ${checkItems.map((item) => item.name)}");
 
       setState(() {
         _loyaltyProgram = loyaltyProgram;
         _summary = summary;
         _checkItems = checkItems;
         _paymentQRCode = paymentQRCode;
+        _brend = brend;
       });
 
-      // Если все товары имеют пустое поле name, запускаем видео
       if (_shouldShowVideo()) {
-        _videoController.play();
+        _videoManager.play();
       } else {
-        _videoController.pause();
+        _videoManager.pause();
       }
     } catch (e) {
       print("Error parsing message: $e");
     }
   }
 
-  // Проверка, нужно ли показывать видео (если все CheckItems пустые)
   bool _shouldShowVideo() {
-    return _checkItems.isEmpty ||
-        _checkItems.every((item) => item.name.isEmpty);
+    return _checkItems.isEmpty || _checkItems.every((item) => item.name.trim().isEmpty);
   }
 
   @override
   void dispose() {
     _webSocketService.disconnect();
-    _videoController.dispose();
+    _videoManager.dispose();
     super.dispose();
   }
 
@@ -143,7 +143,6 @@ class _SecondMonitorState extends State<SecondMonitor> {
                     ),
                   ),
                   const SizedBox(height: 20),
-
                   // Row with LoyaltyProgram, PaymentSection, and PaymentSummary
                   Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -185,21 +184,20 @@ class _SecondMonitorState extends State<SecondMonitor> {
 
   // Видеоплеер на весь экран с черным фоном
   Widget _buildVideoPlayer() {
-    return _isVideoInitialized
+    return _videoManager.isInitialized
         ? Container(
-            width: double.infinity,
-            height: double.infinity,
-            color: Colors.black, // Черный фон для всего контейнера
-            child: FittedBox(
-              fit: BoxFit
-                  .contain, // Видео сохраняет пропорции, черный фон вокруг
-              child: SizedBox(
-                width: _videoController.value.size.width,
-                height: _videoController.value.size.height,
-                child: VideoPlayer(_videoController),
-              ),
-            ),
-          )
+      width: double.infinity,
+      height: double.infinity,
+      color: Colors.black,
+      child: FittedBox(
+        fit: BoxFit.contain,
+        child: SizedBox(
+          width: _videoManager.controller.value.size.width,
+          height: _videoManager.controller.value.size.height,
+          child: WinVideoPlayer(_videoManager.controller),
+        ),
+      ),
+    )
         : Center(child: CircularProgressIndicator());
   }
 
@@ -253,21 +251,21 @@ class _SecondMonitorState extends State<SecondMonitor> {
   Widget _buildPaymentSection() {
     return _paymentQRCode != null && _paymentQRCode!.qrCodeData.isNotEmpty
         ? Container(
-            width: 150,
-            height: 200,
-            decoration: BoxDecoration(
-              color: Color(0xFFF2F2F2),
-              borderRadius: BorderRadius.circular(15),
-              border: Border.all(color: Colors.grey),
-            ),
-            child: Center(
-              child: QrImageView(
-                data: _paymentQRCode!.qrCodeData,
-                size: 150.0,
-                errorCorrectionLevel: QrErrorCorrectLevel.H,
-              ),
-            ),
-          )
+      width: 150,
+      height: 200,
+      decoration: BoxDecoration(
+        color: Color(0xFFF2F2F2),
+        borderRadius: BorderRadius.circular(15),
+        border: Border.all(color: Colors.grey),
+      ),
+      child: Center(
+        child: QrImageView(
+          data: _paymentQRCode!.qrCodeData,
+          size: 150.0,
+          errorCorrectionLevel: QrErrorCorrectLevel.H,
+        ),
+      ),
+    )
         : SizedBox.shrink();
   }
 
@@ -337,27 +335,27 @@ class _SecondMonitorState extends State<SecondMonitor> {
           ],
           rows: _checkItems.isNotEmpty
               ? _checkItems.asMap().entries.map((entry) {
-                  int index = entry.key + 1;
-                  CheckItem item = entry.value;
-                  return DataRow(cells: [
-                    DataCell(Text('$index')),
-                    DataCell(Text(item.name)),
-                    DataCell(Text(item.article)),
-                    DataCell(Text(item.size)),
-                    DataCell(Text('${item.quantity}')),
-                    DataCell(Text('${item.amount}')),
-                  ]);
-                }).toList()
+            int index = entry.key + 1;
+            CheckItem item = entry.value;
+            return DataRow(cells: [
+              DataCell(Text('$index')),
+              DataCell(Text(item.name)),
+              DataCell(Text(item.article)),
+              DataCell(Text(item.size)),
+              DataCell(Text('${item.quantity}')),
+              DataCell(Text('${item.amount}')),
+            ]);
+          }).toList()
               : [
-                  DataRow(cells: [
-                    DataCell(Text('1')),
-                    DataCell(Text('Загрузка...')),
-                    DataCell(Text('')),
-                    DataCell(Text('')),
-                    DataCell(Text('')),
-                    DataCell(Text('')),
-                  ]),
-                ],
+            DataRow(cells: [
+              DataCell(Text('1')),
+              DataCell(Text('Загрузка...')),
+              DataCell(Text('')),
+              DataCell(Text('')),
+              DataCell(Text('')),
+              DataCell(Text('')),
+            ]),
+          ],
         ),
       ),
     );
