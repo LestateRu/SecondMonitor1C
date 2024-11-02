@@ -3,6 +3,7 @@ import 'package:video_player_win/video_player_win.dart';
 import 'dart:io';
 import 'dart:async';
 import 'package:http/http.dart' as http;
+import 'package:second_monitor/Service/logger.dart';
 
 class VideoManager {
   late WinVideoPlayerController _videoController;
@@ -13,17 +14,17 @@ class VideoManager {
     try {
       await _videoController.initialize();
       _isInitialized = true;
-      //print('Video initialized.');
+      log('VideoManager. Video initialized.');
 
       _videoController.addListener(() {
         if (_videoController.value.position >= _videoController.value.duration) {
-         // print('Video ended, restarting...');
+         log('VideoManager. Video ended, restarting...');
           _restartVideoWithDelay();
         }
       });
       play();
     } catch (error) {
-      //print('Error initializing video: $error');
+      log('VideoManager. Error initializing video: $error');
     }
   }
 
@@ -42,16 +43,16 @@ class VideoManager {
 
   void play() {
     if (_isInitialized) {
-      print('Playing video...');
+      print('VideoManager. Playing video...');
       _videoController.play();
     } else {
-      print('Video not initialized yet.');
+      print('VideoManager. Video not initialized yet.');
     }
   }
 
   void pause() {
     if (_isInitialized) {
-      print('Pausing video...');
+      print('VideoManager. Pausing video...');
       _videoController.pause();
     }
   }
@@ -87,17 +88,17 @@ class VideoManager {
               await _downloadAndReplaceFile(fileUrl, localFilePath);
             } else {
               // Локальный файл актуален
-              print('Локальный файл актуален.');
+              log('VideoManager. Локальный файл актуален.');
             }
           }
         } else {
-          print('Заголовок Last-Modified отсутствует.');
+          log('VideoManager. Заголовок Last-Modified отсутствует.');
         }
       } else {
-        print('Ошибка при обращении к серверу: ${response.statusCode}');
+        log('VideoManager. Ошибка при обращении к серверу: ${response.statusCode}');
       }
     } catch (e) {
-      print('Ошибка при проверке или обновлении файла: $e');
+      log('VideoManager. Ошибка при проверке или обновлении файла: $e');
     }
   }
 
@@ -111,12 +112,12 @@ class VideoManager {
         // Сохраняем загруженный файл
         final localFile = File(localFilePath);
         await localFile.writeAsBytes(response.bodyBytes);
-        print('Файл успешно обновлён.');
+        log('VideoManager. Файл успешно обновлён.');
       } else {
-        print('Ошибка при загрузке файла: ${response.statusCode}');
+        log('VideoManager. Ошибка при загрузке файла: ${response.statusCode}');
       }
     } catch (e) {
-      print('Ошибка при загрузке файла: $e');
+      log('VideoManager. Ошибка при загрузке файла: $e');
     }
   }
 }

@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 import 'dart:async';
+import 'package:second_monitor/Service/logger.dart';
 
 class WebSocketServer {
   String receivedDataFrom1C = '';
@@ -12,13 +13,13 @@ class WebSocketServer {
         _startWebSocketServer(),
       ]);
     } catch (e) {
-     // print('Ошибка при запуске серверов: $e');
+     log('WebSocketServer. Ошибка при запуске серверов: $e');
     }
   }
 
   Future<void> _startHttpServer() async {
     final server = await HttpServer.bind(InternetAddress.loopbackIPv4, 4001);
-    //print('HTTP сервер запущен на http://localhost:4001/api/');
+    log('WebSocketServer. HTTP сервер запущен на http://localhost:4001/api/');
 
     await for (HttpRequest request in server) {
       if (request.method == 'POST' && request.uri.path == '/api/') {
@@ -36,14 +37,14 @@ class WebSocketServer {
     try {
       final content = await utf8.decoder.bind(request).join();
       receivedDataFrom1C = content;
-      //print('Получены данные от 1С: $receivedDataFrom1C');
+      log('WebSocketServer. Получены данные от 1С: $receivedDataFrom1C');
 
       request.response
         ..statusCode = HttpStatus.ok
         ..write('Данные получены')
         ..close();
     } catch (e) {
-      //print('Ошибка при обработке HTTP-запроса от 1С: $e');
+      log('WebSocketServer. Ошибка при обработке HTTP-запроса от 1С: $e');
       request.response
         ..statusCode = HttpStatus.internalServerError
         ..write('Ошибка сервера')
@@ -53,12 +54,12 @@ class WebSocketServer {
 
   Future<void> _startWebSocketServer() async {
     final server = await HttpServer.bind(InternetAddress.loopbackIPv4, 4002);
-    //print('WebSocket сервер запущен на ws://localhost:4002/ws/');
+    log('WebSocketServer. WebSocket сервер запущен на ws://localhost:4002/ws/');
 
     await for (HttpRequest request in server) {
       if (WebSocketTransformer.isUpgradeRequest(request)) {
         WebSocket socket = await WebSocketTransformer.upgrade(request);
-        //print('Клиент WebSocket подключен.');
+        log('WebSocketServer. Клиент WebSocket подключен.');
         _sendJsonData(socket);
       } else {
         request.response
@@ -74,7 +75,7 @@ class WebSocketServer {
       Timer.periodic(Duration(milliseconds: 500), (timer) {
         if (receivedDataFrom1C.isNotEmpty) {
           socket.add(receivedDataFrom1C);
-         // print('Отправлены данные клиенту: $receivedDataFrom1C');
+         log('WebSocketServer. Отправлены данные клиенту: $receivedDataFrom1C');
           receivedDataFrom1C = '';
         }
 
@@ -83,7 +84,7 @@ class WebSocketServer {
         }
       });
     } catch (e) {
-      //print('Ошибка при передаче данных по WebSocket: $e');
+      log('WebSocketServer. Ошибка при передаче данных по WebSocket: $e');
       socket.close(WebSocketStatus.internalServerError, 'Ошибка сервера');
     }
   }

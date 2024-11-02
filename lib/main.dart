@@ -5,6 +5,7 @@ import 'dart:io';
 import 'package:path_provider/path_provider.dart';
 import 'package:process_run/shell.dart';
 import 'package:second_monitor/View/second_monitor.dart';
+import 'package:second_monitor/Service/logger.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -62,10 +63,10 @@ Future<bool> _checkForUpdateWindows() async {
         return true;
       }
     } else {
-      print('Ошибка проверки обновления для Windows. Код: ${response.statusCode}');
+      log('main. Ошибка проверки обновления для Windows. Код: ${response.statusCode}');
     }
   } catch (e) {
-    print('Произошла ошибка при проверке обновления для Windows: $e');
+    log('main.Произошла ошибка при проверке обновления для Windows: $e');
   }
   return false; // Если нет обновлений или произошла ошибка
 }
@@ -107,13 +108,13 @@ Future<void> _downloadAndInstallUpdateWindows(String updateUrl) async {
       final file = File(filePath);
       await file.writeAsBytes(response.bodyBytes);
 
-      print('Обновление загружено: $filePath');
+      log('main. Обновление загружено: $filePath');
       await _installAndRestart(filePath);
     } else {
-      print('Ошибка загрузки обновления. Код: ${response.statusCode}');
+      log('main. Ошибка загрузки обновления. Код: ${response.statusCode}');
     }
   } catch (e) {
-    print('Произошла ошибка при загрузке обновления: $e');
+    log('main. Произошла ошибка при загрузке обновления: $e');
   }
 }
 
@@ -131,7 +132,7 @@ Future<void> _installAndRestart(String filePath) async {
 
     exit(0);
   } catch (e) {
-    print('Ошибка при установке: $e');
+    log('main. Ошибка при установке: $e');
   }
 }
 

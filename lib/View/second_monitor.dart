@@ -1,5 +1,5 @@
-import 'dart:async';
 import 'dart:convert';
+import 'dart:io';
 import 'package:screen_retriever/screen_retriever.dart';
 import 'package:second_monitor/Service/VideoManager.dart';
 import 'package:window_manager/window_manager.dart';
@@ -12,6 +12,7 @@ import 'package:second_monitor/Model/PaymentQRCode.dart';
 import 'package:second_monitor/Model/Summary.dart';
 import 'package:second_monitor/Model/Brend.dart';
 import 'package:video_player_win/video_player_win.dart';
+import 'package:second_monitor/Service/logger.dart';
 
 
 class SecondMonitor extends StatefulWidget {
@@ -33,16 +34,16 @@ class _SecondMonitorState extends State<SecondMonitor> {
   @override
   void initState() {
     super.initState();
-
     _webSocketService = WebSocketService();
     _webSocketService.setOnDataReceived(_onDataReceived);
     _webSocketService.connect('ws://localhost:4002/ws/');
-
     _videoManager = VideoManager();
     _initializeVideo();
     _initFullScreen();
     //_scheduleDailyVideoCheck();
   }
+
+
 
   void _initFullScreen() async {
     try {
@@ -68,6 +69,7 @@ class _SecondMonitorState extends State<SecondMonitor> {
             actions: [
               TextButton(
                 onPressed: () {
+                  log('SecondMonitor. Второй монитор не подключен');
                   Navigator.of(context).pop();
                   windowManager.close();
                 },
@@ -78,8 +80,7 @@ class _SecondMonitorState extends State<SecondMonitor> {
         );
       }
     } catch (e) {
-      print("Ошибка инициализации экрана: $e");
-      // Вы можете завершить приложение или показать ошибку
+      log ("SecondMonitor. Ошибка инициализации экрана: $e");
     }
   }
 
@@ -90,7 +91,7 @@ class _SecondMonitorState extends State<SecondMonitor> {
         setState(() {});
       });
     } else {
-      _videoManager.initialize('C:\\SSM\\NSP.mp4').then((_) {
+      _videoManager.initialize('C:\\SSM\\SP.mp4').then((_) {
         setState(() {});
       });
     }
@@ -160,7 +161,7 @@ class _SecondMonitorState extends State<SecondMonitor> {
         _videoManager.pause();
       }
     } catch (e) {
-     // print('Ошибка при обработке сообщения: $e');
+     log('SecondMonitor. Ошибка при обработке сообщения: $e');
     }
   }
 
@@ -297,6 +298,7 @@ class _SecondMonitorState extends State<SecondMonitor> {
                 'Количество бонусов:', '${_loyaltyProgram!.bonusPoints}'),
             _buildLoyaltyItem('До перехода на следующий уровень:',
                 '${_loyaltyProgram!.pointsToNextLevel}'),
+            _buildLoyaltyItem('Сгорание балов:', '${_loyaltyProgram!.dataEndBonus}')
           ] else ...[
             Text('Загрузка...'),
           ],
