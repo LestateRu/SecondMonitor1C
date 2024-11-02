@@ -1,4 +1,6 @@
+import 'dart:async';
 import 'dart:convert';
+import 'package:screen_retriever/screen_retriever.dart';
 import 'package:second_monitor/Service/VideoManager.dart';
 import 'package:window_manager/window_manager.dart';
 import 'package:flutter/material.dart';
@@ -8,9 +10,9 @@ import 'package:second_monitor/Model/CheckItem.dart';
 import 'package:second_monitor/Model/LoyaltyProgram.dart';
 import 'package:second_monitor/Model/PaymentQRCode.dart';
 import 'package:second_monitor/Model/Summary.dart';
-import 'package:second_monitor/Model/Brend.dart'; // Добавляем импорт нового класса
+import 'package:second_monitor/Model/Brend.dart';
 import 'package:video_player_win/video_player_win.dart';
-import 'dart:io';
+
 
 class SecondMonitor extends StatefulWidget {
   @override
@@ -23,44 +25,109 @@ class _SecondMonitorState extends State<SecondMonitor> {
   Summary? _summary;
   List<CheckItem> _checkItems = [];
   PaymentQRCode? _paymentQRCode;
-  Brend? _brend; // Новое поле для хранения информации о бренде
+  Brend? _brend;
 
   late VideoManager _videoManager;
+
 
   @override
   void initState() {
     super.initState();
 
-    // Инициализация WebSocket
     _webSocketService = WebSocketService();
     _webSocketService.setOnDataReceived(_onDataReceived);
-    _webSocketService.connect('ws://localhost:8080/ws/');
+    _webSocketService.connect('ws://localhost:4002/ws/');
 
-    // Инициализация видеоплеера
     _videoManager = VideoManager();
     _initializeVideo();
-
-    // Полноэкранный режим
     _initFullScreen();
+    //_scheduleDailyVideoCheck();
   }
 
   void _initFullScreen() async {
-    await windowManager.ensureInitialized();
-    windowManager.waitUntilReadyToShow().then((_) async {
-      await windowManager.setFullScreen(false);
-    });
+    try {
+      await windowManager.ensureInitialized();
+      List<Display> displays = await screenRetriever.getAllDisplays();
+
+      if (displays.length > 1) {
+        Display secondDisplay = displays[1];
+        var bounds = secondDisplay.bounds;
+        await windowManager.setBounds(Rect.fromLTWH(
+          bounds.left!.toDouble(),
+          bounds.top!.toDouble(),
+          bounds.width!.toDouble(),
+          bounds.height!.toDouble(),
+        ));
+        await windowManager.setFullScreen(true);
+      } else {
+        showDialog(
+          context: context,
+          builder: (_) => AlertDialog(
+            title: Text('Ошибка'),
+            content: Text('Второй экран не найден. Пожалуйста, подключите второй экран.'),
+            actions: [
+              TextButton(
+                onPressed: () {
+                  Navigator.of(context).pop();
+                  windowManager.close();
+                },
+                child: Text('Закрыть'),
+              ),
+            ],
+          ),
+        );
+      }
+    } catch (e) {
+      print("Ошибка инициализации экрана: $e");
+      // Вы можете завершить приложение или показать ошибку
+    }
   }
+
 
   void _initializeVideo() {
-    _videoManager.initialize('C:\\video\\2.mp4').then((_) {
-      setState(() {});
-    });
+    if (_brend != null) {
+      _videoManager.initialize('C:\\SSM\\${_brend?.brendName}.mp4').then((_) {
+        setState(() {});
+      });
+    } else {
+      _videoManager.initialize('C:\\SSM\\NSP.mp4').then((_) {
+        setState(() {});
+      });
+    }
   }
 
-  // Callback для получения данных через WebSocket
+  // void _scheduleDailyVideoCheck() {
+  //   DateTime now = DateTime.now();
+  //   DateTime targetTime = DateTime(now.year, now.month, now.day, 9, 0);
+  //
+  //   if (now.isAfter(targetTime)) {
+  //     targetTime = targetTime.add(Duration(days: 1));
+  //   }
+  //
+  //   Duration initialDelay = targetTime.difference(now);
+  //
+  //   Timer(initialDelay, () {
+  //     if (_brend != null) {
+  //       _videoManager.checkAndUpdateVideo(_brend!);
+  //     }
+  //
+  //     Timer.periodic(Duration(hours: 24), (timer) {
+  //       if (_brend != null) {
+  //         _videoManager.checkAndUpdateVideo(_brend!);
+  //       }
+  //     });
+  //   });
+  // }
+
   void _onDataReceived(dynamic message) {
     try {
       var jsonData = jsonDecode(message);
+
+      var brend = jsonData['brend'] != null ? Brend.fromJson(jsonData['brend']) : null;
+
+      setState(() {
+        _brend = brend;
+      });
 
       var loyaltyProgram = jsonData['loyaltyProgram'] != null
           ? LoyaltyProgram.fromJson(jsonData['loyaltyProgram'])
@@ -80,18 +147,11 @@ class _SecondMonitorState extends State<SecondMonitor> {
           ? PaymentQRCode.fromJson(jsonData['paymentQRCode'])
           : null;
 
-      var brend = jsonData['brend'] != null
-          ? Brend.fromJson(jsonData['brend'])
-          : null;
-
-      print("Received CheckItems: ${checkItems.map((item) => item.name)}");
-
       setState(() {
         _loyaltyProgram = loyaltyProgram;
         _summary = summary;
         _checkItems = checkItems;
         _paymentQRCode = paymentQRCode;
-        _brend = brend;
       });
 
       if (_shouldShowVideo()) {
@@ -100,7 +160,7 @@ class _SecondMonitorState extends State<SecondMonitor> {
         _videoManager.pause();
       }
     } catch (e) {
-      print("Error parsing message: $e");
+     // print('Ошибка при обработке сообщения: $e');
     }
   }
 
@@ -119,7 +179,7 @@ class _SecondMonitorState extends State<SecondMonitor> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: _shouldShowVideo()
-          ? _buildVideoPlayer() // Показываем видео на весь экран
+          ? _buildVideoPlayer()
           : Padding(
         padding: const EdgeInsets.all(20.0),
         child: Center(
@@ -134,42 +194,29 @@ class _SecondMonitorState extends State<SecondMonitor> {
               padding: const EdgeInsets.all(20.0),
               child: Column(
                 children: [
-                  // Header with image
+                  // Header with brand-specific image
                   Center(
-                    child: Image.network(
-                      'https://jnsonline.ru/images/jns_logo.png',
-                      width: 120,
-                      height: 80,
-                    ),
+                    child: _buildBrendLogo(),
                   ),
                   const SizedBox(height: 20),
-                  // Row with LoyaltyProgram, PaymentSection, and PaymentSummary
                   Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      // Loyalty program (left)
                       Expanded(
                         child: _buildLoyaltyProgram(),
                       ),
-
-                      // Payment section (center) with fixed width
                       if (_paymentQRCode != null &&
                           _paymentQRCode!.qrCodeData.isNotEmpty)
                         SizedBox(
-                          width: 150, // Фиксированная ширина для QR-кода
+                          width: 150,
                           child: _buildPaymentSection(),
                         ),
-
-                      // Payment summary (right)
                       Expanded(
                         child: _buildPaymentSummary(),
                       ),
                     ],
                   ),
-
                   const SizedBox(height: 20),
-
-                  // Table of items
                   Expanded(
                     child: _buildItemsTable(),
                   ),
@@ -182,7 +229,33 @@ class _SecondMonitorState extends State<SecondMonitor> {
     );
   }
 
-  // Видеоплеер на весь экран с черным фоном
+  Widget _buildBrendLogo() {
+    String logoPath = 'assets/JNS.png';
+
+    if (_brend != null) {
+      switch (_brend!.brendName) {
+        case 'ASP':
+          logoPath = 'assets/ASP.png';
+          break;
+        case 'NSP':
+          logoPath = 'assets/NSP.png';
+          break;
+        case 'SP':
+          logoPath = 'assets/SP.png';
+          break;
+        case 'JNS':
+          logoPath = 'assets/JNS.png';
+          break;
+      }
+    }
+
+    return Image.asset(
+      logoPath,
+      width: 120,
+      height: 80,
+    );
+  }
+
   Widget _buildVideoPlayer() {
     return _videoManager.isInitialized
         ? Container(
@@ -318,46 +391,52 @@ class _SecondMonitorState extends State<SecondMonitor> {
   }
 
   Widget _buildItemsTable() {
-    return Container(
-      decoration: BoxDecoration(
-        border: Border.all(color: Colors.grey),
-        borderRadius: BorderRadius.circular(20),
-      ),
-      child: SingleChildScrollView(
-        child: DataTable(
-          columns: [
-            DataColumn(label: Text('№')),
-            DataColumn(label: Text('НАИМЕНОВАНИЕ')),
-            DataColumn(label: Text('АРТИКУЛ')),
-            DataColumn(label: Text('РАЗМЕР')),
-            DataColumn(label: Text('КОЛ-ВО')),
-            DataColumn(label: Text('СУММА')),
-          ],
-          rows: _checkItems.isNotEmpty
-              ? _checkItems.asMap().entries.map((entry) {
-            int index = entry.key + 1;
-            CheckItem item = entry.value;
-            return DataRow(cells: [
-              DataCell(Text('$index')),
-              DataCell(Text(item.name)),
-              DataCell(Text(item.article)),
-              DataCell(Text(item.size)),
-              DataCell(Text('${item.quantity}')),
-              DataCell(Text('${item.amount}')),
-            ]);
-          }).toList()
-              : [
-            DataRow(cells: [
-              DataCell(Text('1')),
-              DataCell(Text('Загрузка...')),
-              DataCell(Text('')),
-              DataCell(Text('')),
-              DataCell(Text('')),
-              DataCell(Text('')),
-            ]),
-          ],
+    return Expanded( // Заменяем Container на Expanded
+      child: Container(
+        decoration: BoxDecoration(
+          border: Border.all(color: Colors.grey),
+          borderRadius: BorderRadius.circular(20),
+        ),
+        child: SingleChildScrollView(
+          child: DataTable(
+            columns: [
+              DataColumn(label: Text('№')),
+              DataColumn(label: Text('НАИМЕНОВАНИЕ')),
+              DataColumn(label: Text('АРТИКУЛ')),
+              DataColumn(label: Text('РАЗМЕР')),
+              DataColumn(label: Text('КОЛ-ВО')),
+              DataColumn(label: Text('СУММА')),
+            ],
+            rows: _checkItems.isNotEmpty
+                ? _checkItems.asMap().entries.map((entry) {
+              int index = entry.key + 1;
+              CheckItem item = entry.value;
+              return DataRow(cells: [
+                DataCell(Text('$index')),
+                DataCell(Text(item.name)),
+                DataCell(Text(item.article)),
+                DataCell(Text(item.size)),
+                DataCell(Text('${item.quantity}')),
+                DataCell(Text('${item.amount}')),
+              ]);
+            }).toList()
+                : [
+              DataRow(cells: [
+                DataCell(Text('1')),
+                DataCell(Text('Загрузка...')),
+                DataCell(Text('')),
+                DataCell(Text('')),
+                DataCell(Text('')),
+                DataCell(Text('')),
+              ]),
+            ],
+          ),
         ),
       ),
     );
   }
+}
+
+extension on Display {
+   get bounds => null;
 }
