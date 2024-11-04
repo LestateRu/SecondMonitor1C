@@ -1,9 +1,10 @@
 import 'dart:convert';
 import 'dart:io';
+import 'package:flutter/material.dart';
+import 'package:play_video/play_video.dart';
 import 'package:screen_retriever/screen_retriever.dart';
 import 'package:second_monitor/Service/VideoManager.dart';
 import 'package:window_manager/window_manager.dart';
-import 'package:flutter/material.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 import 'package:second_monitor/Service/WebSocketService.dart';
 import 'package:second_monitor/Model/CheckItem.dart';
@@ -11,9 +12,7 @@ import 'package:second_monitor/Model/LoyaltyProgram.dart';
 import 'package:second_monitor/Model/PaymentQRCode.dart';
 import 'package:second_monitor/Model/Summary.dart';
 import 'package:second_monitor/Model/Brend.dart';
-import 'package:video_player_win/video_player_win.dart';
 import 'package:second_monitor/Service/logger.dart';
-
 
 class SecondMonitor extends StatefulWidget {
   @override
@@ -30,7 +29,6 @@ class _SecondMonitorState extends State<SecondMonitor> {
 
   late VideoManager _videoManager;
 
-
   @override
   void initState() {
     super.initState();
@@ -40,15 +38,15 @@ class _SecondMonitorState extends State<SecondMonitor> {
     _videoManager = VideoManager();
     _initializeVideo();
     _initFullScreen();
-    //_scheduleDailyVideoCheck();
   }
-
-
 
   void _initFullScreen() async {
     try {
       await windowManager.ensureInitialized();
+      log("Window manager initialized successfully");
+
       List<Display> displays = await screenRetriever.getAllDisplays();
+      log("Displays retrieved: ${displays.length}");
 
       if (displays.length > 1) {
         Display secondDisplay = displays[1];
@@ -60,7 +58,9 @@ class _SecondMonitorState extends State<SecondMonitor> {
           bounds.height!.toDouble(),
         ));
         await windowManager.setFullScreen(true);
+        log("App set to fullscreen on the second display");
       } else {
+        log("Second display not found");
         showDialog(
           context: context,
           builder: (_) => AlertDialog(
@@ -80,50 +80,20 @@ class _SecondMonitorState extends State<SecondMonitor> {
         );
       }
     } catch (e) {
-      log ("SecondMonitor. Ошибка инициализации экрана: $e");
+      log("SecondMonitor. Ошибка инициализации экрана: $e");
     }
   }
-
 
   void _initializeVideo() {
-    if (_brend != null) {
-      _videoManager.initialize('C:\\SSM\\${_brend?.brendName}.mp4').then((_) {
-        setState(() {});
-      });
-    } else {
-      _videoManager.initialize('C:\\SSM\\SP.mp4').then((_) {
-        setState(() {});
-      });
-    }
+    String videoPath = _brend != null ? 'C:\\SSM\\${_brend?.brendName}.mp4' : 'C:\\SSM\\SP.mp4';
+    _videoManager.initialize(videoPath).then((_) {
+      setState(() {});
+    });
   }
-
-  // void _scheduleDailyVideoCheck() {
-  //   DateTime now = DateTime.now();
-  //   DateTime targetTime = DateTime(now.year, now.month, now.day, 9, 0);
-  //
-  //   if (now.isAfter(targetTime)) {
-  //     targetTime = targetTime.add(Duration(days: 1));
-  //   }
-  //
-  //   Duration initialDelay = targetTime.difference(now);
-  //
-  //   Timer(initialDelay, () {
-  //     if (_brend != null) {
-  //       _videoManager.checkAndUpdateVideo(_brend!);
-  //     }
-  //
-  //     Timer.periodic(Duration(hours: 24), (timer) {
-  //       if (_brend != null) {
-  //         _videoManager.checkAndUpdateVideo(_brend!);
-  //       }
-  //     });
-  //   });
-  // }
 
   void _onDataReceived(dynamic message) {
     try {
       var jsonData = jsonDecode(message);
-
       var brend = jsonData['brend'] != null ? Brend.fromJson(jsonData['brend']) : null;
 
       setState(() {
@@ -133,16 +103,12 @@ class _SecondMonitorState extends State<SecondMonitor> {
       var loyaltyProgram = jsonData['loyaltyProgram'] != null
           ? LoyaltyProgram.fromJson(jsonData['loyaltyProgram'])
           : null;
-
       var summary = jsonData['summary'] != null
           ? Summary.fromJson(jsonData['summary'])
           : null;
-
       var checkItems = jsonData['checkItems'] != null
-          ? List<CheckItem>.from(
-          jsonData['checkItems'].map((item) => CheckItem.fromJson(item)))
+          ? List<CheckItem>.from(jsonData['checkItems'].map((item) => CheckItem.fromJson(item)))
           : <CheckItem>[];
-
       var paymentQRCode = jsonData['paymentQRCode'] != null &&
           jsonData['paymentQRCode']['qrCodeData'] != null
           ? PaymentQRCode.fromJson(jsonData['paymentQRCode'])
@@ -161,7 +127,7 @@ class _SecondMonitorState extends State<SecondMonitor> {
         _videoManager.pause();
       }
     } catch (e) {
-     log('SecondMonitor. Ошибка при обработке сообщения: $e');
+      log('SecondMonitor. Ошибка при обработке сообщения: $e');
     }
   }
 
@@ -195,32 +161,20 @@ class _SecondMonitorState extends State<SecondMonitor> {
               padding: const EdgeInsets.all(20.0),
               child: Column(
                 children: [
-                  // Header with brand-specific image
-                  Center(
-                    child: _buildBrendLogo(),
-                  ),
+                  Center(child: _buildBrendLogo()),
                   const SizedBox(height: 20),
                   Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Expanded(
-                        child: _buildLoyaltyProgram(),
-                      ),
+                      Expanded(child: _buildLoyaltyProgram()),
                       if (_paymentQRCode != null &&
                           _paymentQRCode!.qrCodeData.isNotEmpty)
-                        SizedBox(
-                          width: 150,
-                          child: _buildPaymentSection(),
-                        ),
-                      Expanded(
-                        child: _buildPaymentSummary(),
-                      ),
+                        SizedBox(width: 150, child: _buildPaymentSection()),
+                      Expanded(child: _buildPaymentSummary()),
                     ],
                   ),
                   const SizedBox(height: 20),
-                  Expanded(
-                    child: _buildItemsTable(),
-                  ),
+                  Expanded(child: _buildItemsTable()),
                 ],
               ),
             ),
@@ -268,7 +222,7 @@ class _SecondMonitorState extends State<SecondMonitor> {
         child: SizedBox(
           width: _videoManager.controller.value.size.width,
           height: _videoManager.controller.value.size.height,
-          child: WinVideoPlayer(_videoManager.controller),
+          child: PlayVideo(controller: _videoManager.controller),
         ),
       ),
     )

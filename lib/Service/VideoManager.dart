@@ -1,5 +1,5 @@
 import 'package:second_monitor/Model/Brend.dart';
-import 'package:video_player_win/video_player_win.dart';
+import 'package:video_player_media_kit/video_player_media_kit.dart';
 import 'dart:io';
 import 'dart:async';
 import 'package:http/http.dart' as http;
@@ -10,7 +10,8 @@ class VideoManager {
   bool _isInitialized = false;
 
   Future<void> initialize(String videoPath) async {
-    _videoController = WinVideoPlayerController.file(File(videoPath));
+    _videoController = VideoPlayerController.file(File(videoPath));
+
     try {
       await _videoController.initialize();
       _isInitialized = true;
@@ -18,10 +19,11 @@ class VideoManager {
 
       _videoController.addListener(() {
         if (_videoController.value.position >= _videoController.value.duration) {
-         log('VideoManager. Video ended, restarting...');
+          log('VideoManager. Video ended, restarting...');
           _restartVideoWithDelay();
         }
       });
+
       play();
     } catch (error) {
       log('VideoManager. Error initializing video: $error');
