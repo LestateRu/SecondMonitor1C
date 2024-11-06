@@ -36,6 +36,7 @@ dependencies:
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.6
   qr_flutter: ^4.1.0
+  video_player_win: ^3.1.1
   window_manager: ^0.4.2
   cron: ^0.6.1
   http: ^1.2.2
@@ -44,7 +45,6 @@ dependencies:
   path_provider: ^2.1.4
   process_run: ^1.2.1+1
   video_player: ^2.9.2
-  play_video: ^0.0.1
 
 
 dev_dependencies:

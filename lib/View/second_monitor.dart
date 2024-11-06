@@ -1,10 +1,9 @@
 import 'dart:convert';
 import 'dart:io';
-import 'package:flutter/material.dart';
-import 'package:play_video/play_video.dart';
 import 'package:screen_retriever/screen_retriever.dart';
 import 'package:second_monitor/Service/VideoManager.dart';
 import 'package:window_manager/window_manager.dart';
+import 'package:flutter/material.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 import 'package:second_monitor/Service/WebSocketService.dart';
 import 'package:second_monitor/Model/CheckItem.dart';
@@ -12,7 +11,10 @@ import 'package:second_monitor/Model/LoyaltyProgram.dart';
 import 'package:second_monitor/Model/PaymentQRCode.dart';
 import 'package:second_monitor/Model/Summary.dart';
 import 'package:second_monitor/Model/Brend.dart';
+import 'package:video_player_win/video_player_win.dart';
 import 'package:second_monitor/Service/logger.dart';
+import 'package:second_monitor/Service/Server.dart';
+
 
 class SecondMonitor extends StatefulWidget {
   @override
@@ -21,34 +23,37 @@ class SecondMonitor extends StatefulWidget {
 
 class _SecondMonitorState extends State<SecondMonitor> {
   late WebSocketService _webSocketService;
+  late Server _server;
   LoyaltyProgram? _loyaltyProgram;
   Summary? _summary;
   List<CheckItem> _checkItems = [];
   PaymentQRCode? _paymentQRCode;
   Brend? _brend;
-
   late VideoManager _videoManager;
+
 
   @override
   void initState() {
     super.initState();
+    _server = Server();
+    _server.startServer();
     _webSocketService = WebSocketService();
     _webSocketService.setOnDataReceived(_onDataReceived);
     _webSocketService.connect('ws://localhost:4002/ws/');
     _videoManager = VideoManager();
     _initializeVideo();
     _initFullScreen();
+    //_scheduleDailyVideoCheck();
   }
+
+
 
   void _initFullScreen() async {
     try {
       await windowManager.ensureInitialized();
-      log("Window manager initialized successfully");
-
       List<Display> displays = await screenRetriever.getAllDisplays();
-      log("Displays retrieved: ${displays.length}");
-
-      if (displays.length > 1) {
+      await windowManager.setFullScreen(false);
+      if (displays.length == 1) {
         Display secondDisplay = displays[1];
         var bounds = secondDisplay.bounds;
         await windowManager.setBounds(Rect.fromLTWH(
@@ -57,10 +62,8 @@ class _SecondMonitorState extends State<SecondMonitor> {
           bounds.width!.toDouble(),
           bounds.height!.toDouble(),
         ));
-        await windowManager.setFullScreen(true);
-        log("App set to fullscreen on the second display");
+
       } else {
-        log("Second display not found");
         showDialog(
           context: context,
           builder: (_) => AlertDialog(
@@ -80,20 +83,50 @@ class _SecondMonitorState extends State<SecondMonitor> {
         );
       }
     } catch (e) {
-      log("SecondMonitor. Ошибка инициализации экрана: $e");
+      log ("SecondMonitor. Ошибка инициализации экрана: $e");
     }
   }
 
+
   void _initializeVideo() {
-    String videoPath = _brend != null ? 'C:\\SSM\\${_brend?.brendName}.mp4' : 'C:\\SSM\\SP.mp4';
-    _videoManager.initialize(videoPath).then((_) {
-      setState(() {});
-    });
+    if (_brend != null) {
+      _videoManager.initialize('C:\\SSM\\${_brend?.brendName}.mp4').then((value) {
+        setState(() {});
+      });
+    } else {
+      _videoManager.initialize('C:\\SSM\\SP.mp4').then((value) {
+        setState(() {});
+      });
+    }
   }
+
+  // void _scheduleDailyVideoCheck() {
+  //   DateTime now = DateTime.now();
+  //   DateTime targetTime = DateTime(now.year, now.month, now.day, 9, 0);
+  //
+  //   if (now.isAfter(targetTime)) {
+  //     targetTime = targetTime.add(Duration(days: 1));
+  //   }
+  //
+  //   Duration initialDelay = targetTime.difference(now);
+  //
+  //   Timer(initialDelay, () {
+  //     if (_brend != null) {
+  //       _videoManager.checkAndUpdateVideo(_brend!);
+  //     }
+  //
+  //     Timer.periodic(Duration(hours: 24), (timer) {
+  //       if (_brend != null) {
+  //         _videoManager.checkAndUpdateVideo(_brend!);
+  //       }
+  //     });
+  //   });
+  // }
 
   void _onDataReceived(dynamic message) {
     try {
       var jsonData = jsonDecode(message);
+
       var brend = jsonData['brend'] != null ? Brend.fromJson(jsonData['brend']) : null;
 
       setState(() {
@@ -103,12 +136,16 @@ class _SecondMonitorState extends State<SecondMonitor> {
       var loyaltyProgram = jsonData['loyaltyProgram'] != null
           ? LoyaltyProgram.fromJson(jsonData['loyaltyProgram'])
           : null;
+
       var summary = jsonData['summary'] != null
           ? Summary.fromJson(jsonData['summary'])
           : null;
+
       var checkItems = jsonData['checkItems'] != null
-          ? List<CheckItem>.from(jsonData['checkItems'].map((item) => CheckItem.fromJson(item)))
+          ? List<CheckItem>.from(
+          jsonData['checkItems'].map((item) => CheckItem.fromJson(item)))
           : <CheckItem>[];
+
       var paymentQRCode = jsonData['paymentQRCode'] != null &&
           jsonData['paymentQRCode']['qrCodeData'] != null
           ? PaymentQRCode.fromJson(jsonData['paymentQRCode'])
@@ -161,20 +198,31 @@ class _SecondMonitorState extends State<SecondMonitor> {
               padding: const EdgeInsets.all(20.0),
               child: Column(
                 children: [
-                  Center(child: _buildBrendLogo()),
+                  Center(
+                    child: _buildBrendLogo(),
+                  ),
                   const SizedBox(height: 20),
                   Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Expanded(child: _buildLoyaltyProgram()),
+                      Expanded(
+                        child: _buildLoyaltyProgram(),
+                      ),
                       if (_paymentQRCode != null &&
                           _paymentQRCode!.qrCodeData.isNotEmpty)
-                        SizedBox(width: 150, child: _buildPaymentSection()),
-                      Expanded(child: _buildPaymentSummary()),
+                        SizedBox(
+                          width: 150,
+                          child: _buildPaymentSection(),
+                        ),
+                      Expanded(
+                        child: _buildPaymentSummary(),
+                      ),
                     ],
                   ),
                   const SizedBox(height: 20),
-                  Expanded(child: _buildItemsTable()),
+                  Expanded(
+                    child: _buildItemsTable(),
+                  ),
                 ],
               ),
             ),
@@ -205,11 +253,12 @@ class _SecondMonitorState extends State<SecondMonitor> {
     }
 
     return Image.asset(
-      logoPath,
-      width: 120,
-      height: 80,
+            logoPath,
+            width: 120,
+            height: 80,
     );
   }
+
 
   Widget _buildVideoPlayer() {
     return _videoManager.isInitialized
@@ -222,7 +271,7 @@ class _SecondMonitorState extends State<SecondMonitor> {
         child: SizedBox(
           width: _videoManager.controller.value.size.width,
           height: _videoManager.controller.value.size.height,
-          child: PlayVideo(controller: _videoManager.controller),
+          child: WinVideoPlayer(_videoManager.controller),
         ),
       ),
     )
@@ -243,16 +292,16 @@ class _SecondMonitorState extends State<SecondMonitor> {
         children: [
           Text(
             'ПРОГРАММА ЛОЯЛЬНОСТИ',
-            style: TextStyle(fontWeight: FontWeight.bold),
+            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
           ),
           SizedBox(height: 10),
           if (_loyaltyProgram != null) ...[
-            _buildLoyaltyItem('Уровень:', _loyaltyProgram!.level),
+            _buildLoyaltyItem('УРОВЕНЬ:', _loyaltyProgram!.level),
             _buildLoyaltyItem(
-                'Количество бонусов:', '${_loyaltyProgram!.bonusPoints}'),
-            _buildLoyaltyItem('До перехода на следующий уровень:',
+                'КОЛИЧЕСТВО БОНУСОВ:', '${_loyaltyProgram!.bonusPoints}'),
+            _buildLoyaltyItem('ДО ПЕРЕХОДА НА СЛЕДУЮЩИЙ УРОВЕНЬ:',
                 '${_loyaltyProgram!.pointsToNextLevel}'),
-            _buildLoyaltyItem('Сгорание балов:', '${_loyaltyProgram!.dataEndBonus}')
+            _buildLoyaltyItem('СГОРАНИЕ БАЛОВ:', '${_loyaltyProgram!.dataEndBonus}')
           ] else ...[
             Text('Загрузка...'),
           ],
@@ -261,16 +310,16 @@ class _SecondMonitorState extends State<SecondMonitor> {
     );
   }
 
-  Widget _buildLoyaltyItem(String label, String value) {
+  Widget _buildLoyaltyItem(String label, String value, {bool isBold = true}) {
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 5.0),
+      padding: const EdgeInsets.symmetric(vertical: 3.0),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Text(label),
           Text(
             value,
-            style: TextStyle(fontWeight: FontWeight.bold),
+            style: TextStyle(fontWeight: isBold ? FontWeight.bold : FontWeight.normal, fontSize: 14),
           ),
         ],
       ),
@@ -310,16 +359,18 @@ class _SecondMonitorState extends State<SecondMonitor> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          _buildPaymentSummaryItem('ИТОГО', ''),
+          Text('ИТОГО',
+            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+          ),
+          SizedBox(height: 10),
           if (_summary != null) ...[
             _buildPaymentSummaryItem(
-                'Количество позиций:', '${_summary!.totalItems}'),
+                'КОЛИЧЕСТВО ПОЗИЦИЙ:', '${_summary!.totalItems}'),
             _buildPaymentSummaryItem(
-                'Сумма скидки:', '${_summary!.discountAmount}'),
+                'СУММА СКИДКИ:', '${_summary!.discountAmount}'),
             _buildPaymentSummaryItem(
-                'За покупку начисляется:', '${_summary!.bonusForPurchase}'),
-            _buildPaymentSummaryItem('СУММА ЧЕКА:', '${_summary!.totalAmount}',
-                isBold: true),
+                'ЗА ПОКУПКУ НАЧИСЛЯЕТСЯ:', '${_summary!.bonusForPurchase}'),
+            _buildPaymentSummaryItem('СУММА ЧЕКА:', '${_summary!.totalAmount}', isBold: true),
           ] else ...[
             Text('Загрузка...'),
           ],
@@ -328,26 +379,28 @@ class _SecondMonitorState extends State<SecondMonitor> {
     );
   }
 
-  Widget _buildPaymentSummaryItem(String label, String value,
-      {bool isBold = false}) {
+  Widget _buildPaymentSummaryItem(String label, String value, {bool isBold = false, double fontSize = 14}) {
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 5.0),
+      padding: const EdgeInsets.symmetric(vertical: 3.0),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Text(label),
+          Text(
+            label,
+            style: TextStyle(fontWeight: isBold ? FontWeight.bold : FontWeight.normal, fontSize: fontSize),
+          ),
           Text(
             value,
-            style: TextStyle(
-                fontWeight: isBold ? FontWeight.bold : FontWeight.normal),
+            style: TextStyle(fontWeight: isBold ? FontWeight.bold : FontWeight.normal, fontSize: fontSize),
           ),
         ],
       ),
     );
   }
 
+
   Widget _buildItemsTable() {
-    return Expanded( // Заменяем Container на Expanded
+    return Expanded(
       child: Container(
         decoration: BoxDecoration(
           border: Border.all(color: Colors.grey),
@@ -394,5 +447,5 @@ class _SecondMonitorState extends State<SecondMonitor> {
 }
 
 extension on Display {
-   get bounds => null;
+  get bounds => null;
 }

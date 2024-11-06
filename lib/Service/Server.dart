@@ -3,7 +3,7 @@ import 'dart:io';
 import 'dart:async';
 import 'package:second_monitor/Service/logger.dart';
 
-class WebSocketServer {
+class Server {
   String receivedDataFrom1C = '';
 
   Future<void> startServer() async {
@@ -91,6 +91,6 @@ class WebSocketServer {
 }
 
 void main() async {
-  final server = WebSocketServer();
+  final server = Server();
   await server.startServer();
 }
