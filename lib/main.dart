@@ -6,9 +6,14 @@ import 'package:path_provider/path_provider.dart';
 import 'package:process_run/shell.dart';
 import 'package:second_monitor/View/second_monitor.dart';
 import 'package:second_monitor/Service/logger.dart';
+import 'SettingsWindow.dart';
+import 'package:hotkey_manager/hotkey_manager.dart';
+import 'package:hotkey_manager/hotkey.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await hotKeyManager.unregisterAll(); // Очистка всех горячих клавиш
+  await loadSettings(); // Загрузка настроек при старте
   runApp(MyApp());
 }
 
@@ -34,7 +39,7 @@ class MyApp extends StatelessWidget {
               body: Center(child: Text('Ошибка проверки обновлений')),
             );
           } else if (snapshot.data == false) {
-            return SecondMonitor(); // Основная страница приложения
+            return MainScreen(); // Основная страница приложения
           } else {
             return Scaffold(
               appBar: AppBar(title: Text('Обновление')),
@@ -44,6 +49,54 @@ class MyApp extends StatelessWidget {
         },
       ),
     );
+  }
+}
+
+class MainScreen extends StatefulWidget {
+  @override
+  _MainScreenState createState() => _MainScreenState();
+}
+
+class _MainScreenState extends State<MainScreen> {
+  @override
+  void initState() {
+    super.initState();
+    _registerHotKey();
+  }
+
+  @override
+  void dispose() {
+    hotKeyManager.unregisterAll(); // Отмена регистрации горячих клавиш
+    super.dispose();
+  }
+
+  void _registerHotKey() async {
+    final hotKey = HotKey(
+      KeyCode.keyH,
+      modifiers: [KeyModifier.control],
+      scope: HotKeyScope.system, // Глобальная область действия
+    );
+
+    await hotKeyManager.register(
+      hotKey,
+      keyDownHandler: (hotKey) {
+        _openSettingsWindow();
+      },
+    );
+  }
+
+  void _openSettingsWindow() {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return SettingsWindow();
+      },
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return SecondMonitor();
   }
 }
 
@@ -137,3 +190,13 @@ Future<void> _installAndRestart(String filePath) async {
 }
 
 final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
+
+Future<void> loadSettings() async {
+  final directory = await getApplicationDocumentsDirectory();
+  final settingsFile = File('${directory.path}/settings.json');
+
+  if (await settingsFile.exists()) {
+    final settingsJson = await settingsFile.readAsString();
+    // Здесь можно загрузить данные настроек в соответствующие переменные
+  }
+}

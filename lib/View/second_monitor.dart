@@ -43,48 +43,16 @@ class _SecondMonitorState extends State<SecondMonitor> {
     _videoManager = VideoManager();
     _initializeVideo();
     _initFullScreen();
+
     //_scheduleDailyVideoCheck();
   }
 
 
 
   void _initFullScreen() async {
-    try {
       await windowManager.ensureInitialized();
       List<Display> displays = await screenRetriever.getAllDisplays();
-      await windowManager.setFullScreen(false);
-      if (displays.length == 1) {
-        Display secondDisplay = displays[1];
-        var bounds = secondDisplay.bounds;
-        await windowManager.setBounds(Rect.fromLTWH(
-          bounds.left!.toDouble(),
-          bounds.top!.toDouble(),
-          bounds.width!.toDouble(),
-          bounds.height!.toDouble(),
-        ));
-
-      } else {
-        showDialog(
-          context: context,
-          builder: (_) => AlertDialog(
-            title: Text('Ошибка'),
-            content: Text('Второй экран не найден. Пожалуйста, подключите второй экран.'),
-            actions: [
-              TextButton(
-                onPressed: () {
-                  log('SecondMonitor. Второй монитор не подключен');
-                  Navigator.of(context).pop();
-                  windowManager.close();
-                },
-                child: Text('Закрыть'),
-              ),
-            ],
-          ),
-        );
-      }
-    } catch (e) {
-      log ("SecondMonitor. Ошибка инициализации экрана: $e");
-    }
+        await windowManager.setFullScreen(true);
   }
 
 
@@ -94,7 +62,7 @@ class _SecondMonitorState extends State<SecondMonitor> {
         setState(() {});
       });
     } else {
-      _videoManager.initialize('C:\\SSM\\SP.mp4').then((value) {
+      _videoManager.initialize('C:\\SSM\\NSP.mp4').then((value) {
         setState(() {});
       });
     }
