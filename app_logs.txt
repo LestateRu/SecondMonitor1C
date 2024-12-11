@@ -1,0 +1,688 @@
+2024-11-04 18:47:17.281571: main.Произошла ошибка при проверке обновления для Windows: ClientException with SocketException: Превышен таймаут семафора.
+2024-11-04 18:47:17.436478: Window manager initialized successfully
+2024-11-04 18:47:17.465456: Displays retrieved: 1
+2024-11-04 18:47:17.486633: Second display not found
+2024-11-04 18:47:17.696487: VideoManager. Video initialized.
+2024-11-04 18:47:19.469229: WebSocketService. Error connecting to WebSocket: SocketException: Удаленный компьютер отклонил это сетевое подключение.
+2024-11-04 18:47:37.808411: VideoManager. Video ended, restarting...
+2024-11-04 18:47:58.360954: VideoManager. Video ended, restarting...
+2024-11-04 18:48:18.929197: VideoManager. Video ended, restarting...
+2024-11-04 18:48:39.496315: VideoManager. Video ended, restarting...
+2024-11-04 18:49:00.039961: VideoManager. Video ended, restarting...
+2024-11-04 18:49:20.573619: VideoManager. Video ended, restarting...
+2024-11-04 18:49:20.588613: VideoManager. Video ended, restarting...
+2024-11-04 18:49:41.121679: VideoManager. Video ended, restarting...
+2024-11-04 18:50:01.670534: VideoManager. Video ended, restarting...
+2024-11-04 18:50:22.225115: VideoManager. Video ended, restarting...
+2024-11-04 18:50:42.762053: VideoManager. Video ended, restarting...
+2024-11-04 18:51:03.308176: VideoManager. Video ended, restarting...
+2024-11-04 18:51:23.848477: VideoManager. Video ended, restarting...
+2024-11-04 18:51:44.345748: VideoManager. Video ended, restarting...
+2024-11-04 18:52:04.902876: VideoManager. Video ended, restarting...
+2024-11-04 18:52:25.454761: VideoManager. Video ended, restarting...
+2024-11-04 18:52:46.005081: VideoManager. Video ended, restarting...
+2024-11-04 18:53:06.551750: VideoManager. Video ended, restarting...
+2024-11-04 18:53:27.126265: VideoManager. Video ended, restarting...
+2024-11-04 18:53:47.681862: VideoManager. Video ended, restarting...
+2024-11-04 18:54:08.230377: VideoManager. Video ended, restarting...
+2024-11-04 18:54:28.778410: VideoManager. Video ended, restarting...
+2024-11-04 18:54:49.333429: VideoManager. Video ended, restarting...
+2024-11-04 18:55:09.901280: VideoManager. Video ended, restarting...
+2024-11-04 18:55:30.475610: VideoManager. Video ended, restarting...
+2024-11-04 18:55:51.030905: VideoManager. Video ended, restarting...
+2024-11-04 18:56:11.607210: VideoManager. Video ended, restarting...
+2024-11-04 18:56:32.165071: VideoManager. Video ended, restarting...
+2024-11-04 18:56:52.716239: VideoManager. Video ended, restarting...
+2024-11-04 18:57:13.282812: VideoManager. Video ended, restarting...
+2024-11-04 18:57:33.826813: VideoManager. Video ended, restarting...
+2024-11-04 18:57:54.388621: VideoManager. Video ended, restarting...
+2024-11-04 18:58:14.937890: VideoManager. Video ended, restarting...
+2024-11-04 18:58:35.500186: VideoManager. Video ended, restarting...
+2024-11-04 18:58:56.049627: VideoManager. Video ended, restarting...
+2024-11-04 18:59:16.580543: VideoManager. Video ended, restarting...
+2024-11-04 18:59:37.147749: VideoManager. Video ended, restarting...
+2024-11-04 18:59:57.709282: VideoManager. Video ended, restarting...
+2024-11-04 19:00:18.289171: VideoManager. Video ended, restarting...
+2024-11-04 19:00:38.853353: VideoManager. Video ended, restarting...
+2024-11-04 19:00:59.412980: VideoManager. Video ended, restarting...
+2024-11-04 19:01:19.989685: VideoManager. Video ended, restarting...
+2024-11-04 19:01:40.558149: VideoManager. Video ended, restarting...
+2024-11-04 19:02:01.114892: VideoManager. Video ended, restarting...
+2024-11-04 19:02:21.651350: VideoManager. Video ended, restarting...
+2024-11-04 19:02:42.224735: VideoManager. Video ended, restarting...
+2024-11-04 19:03:02.802887: VideoManager. Video ended, restarting...
+2024-11-04 19:03:23.337632: VideoManager. Video ended, restarting...
+2024-11-04 19:03:43.893072: VideoManager. Video ended, restarting...
+2024-11-04 19:04:04.439671: VideoManager. Video ended, restarting...
+2024-11-04 19:04:25.011807: VideoManager. Video ended, restarting...
+2024-11-04 19:04:45.582468: VideoManager. Video ended, restarting...
+2024-11-04 19:05:06.136063: VideoManager. Video ended, restarting...
+2024-11-04 19:05:26.665364: VideoManager. Video ended, restarting...
+2024-11-04 19:05:26.687073: VideoManager. Video ended, restarting...
+2024-11-04 19:05:47.231890: VideoManager. Video ended, restarting...
+2024-11-04 19:06:07.781824: VideoManager. Video ended, restarting...
+2024-11-04 19:06:28.324090: VideoManager. Video ended, restarting...
+2024-11-04 19:06:48.874093: VideoManager. Video ended, restarting...
+2024-11-04 19:07:09.434228: VideoManager. Video ended, restarting...
+2024-11-04 19:07:29.979087: VideoManager. Video ended, restarting...
+2024-11-04 19:07:50.517513: VideoManager. Video ended, restarting...
+2024-11-04 19:08:11.073694: VideoManager. Video ended, restarting...
+2024-11-04 19:08:31.632942: VideoManager. Video ended, restarting...
+2024-11-04 19:08:52.160695: VideoManager. Video ended, restarting...
+2024-11-04 19:09:12.695904: VideoManager. Video ended, restarting...
+2024-11-04 19:09:33.247263: VideoManager. Video ended, restarting...
+2024-11-04 19:09:53.805911: VideoManager. Video ended, restarting...
+2024-11-04 19:10:14.358475: VideoManager. Video ended, restarting...
+2024-11-04 19:10:34.898948: VideoManager. Video ended, restarting...
+2024-11-04 19:10:55.443062: VideoManager. Video ended, restarting...
+2024-11-04 19:11:16.006095: VideoManager. Video ended, restarting...
+2024-11-04 19:11:36.542844: VideoManager. Video ended, restarting...
+2024-11-04 19:11:57.087873: VideoManager. Video ended, restarting...
+2024-11-04 19:12:17.638528: VideoManager. Video ended, restarting...
+2024-11-04 19:12:38.168953: VideoManager. Video ended, restarting...
+2024-11-04 19:12:58.732306: VideoManager. Video ended, restarting...
+2024-11-04 19:13:19.268570: VideoManager. Video ended, restarting...
+2024-11-04 19:13:39.817899: VideoManager. Video ended, restarting...
+2024-11-04 19:14:00.345606: VideoManager. Video ended, restarting...
+2024-11-04 19:14:20.887850: VideoManager. Video ended, restarting...
+2024-11-04 19:14:41.424358: VideoManager. Video ended, restarting...
+2024-11-04 19:15:01.947960: VideoManager. Video ended, restarting...
+2024-11-04 19:15:22.503663: VideoManager. Video ended, restarting...
+2024-11-04 19:15:43.043703: VideoManager. Video ended, restarting...
+2024-11-04 19:16:03.589643: VideoManager. Video ended, restarting...
+2024-11-04 19:16:24.147160: VideoManager. Video ended, restarting...
+2024-11-04 19:16:44.684888: VideoManager. Video ended, restarting...
+2024-11-04 19:17:05.235606: VideoManager. Video ended, restarting...
+2024-11-04 19:17:25.779195: VideoManager. Video ended, restarting...
+2024-11-04 19:17:25.799726: VideoManager. Video ended, restarting...
+2024-11-04 19:17:46.346617: VideoManager. Video ended, restarting...
+2024-11-04 19:18:06.916444: VideoManager. Video ended, restarting...
+2024-11-04 19:18:27.467516: VideoManager. Video ended, restarting...
+2024-11-04 19:18:48.005869: VideoManager. Video ended, restarting...
+2024-11-04 19:19:08.579074: VideoManager. Video ended, restarting...
+2024-11-04 19:19:29.130247: VideoManager. Video ended, restarting...
+2024-11-04 19:19:49.701748: VideoManager. Video ended, restarting...
+2024-11-04 19:20:10.270286: VideoManager. Video ended, restarting...
+2024-11-04 19:20:30.832128: VideoManager. Video ended, restarting...
+2024-11-04 19:20:51.373975: VideoManager. Video ended, restarting...
+2024-11-04 19:21:11.915389: VideoManager. Video ended, restarting...
+2024-11-04 19:21:32.445381: VideoManager. Video ended, restarting...
+2024-11-04 19:21:53.022483: VideoManager. Video ended, restarting...
+2024-11-04 19:22:13.568981: VideoManager. Video ended, restarting...
+2024-11-04 19:22:34.155654: VideoManager. Video ended, restarting...
+2024-11-04 19:22:54.693207: VideoManager. Video ended, restarting...
+2024-11-04 19:24:10.282983: main.Произошла ошибка при проверке обновления для Windows: ClientException with SocketException: Превышен таймаут семафора.
+2024-11-04 19:24:10.372236: Window manager initialized successfully
+2024-11-04 19:24:10.388250: Displays retrieved: 1
+2024-11-04 19:24:10.402767: Second display not found
+2024-11-04 19:24:10.482355: VideoManager. Video initialized.
+2024-11-04 19:24:12.524363: WebSocketService. Error connecting to WebSocket: SocketException: Удаленный компьютер отклонил это сетевое подключение.
+2024-11-04 19:24:15.825185: SecondMonitor. Второй монитор не подключен
+2024-11-05 09:11:49.488974: main.Произошла ошибка при проверке обновления для Windows: ClientException with SocketException: Превышен таймаут семафора.
+2024-11-05 09:11:49.731860: VideoManager. Video initialized.
+2024-11-05 09:11:51.620490: WebSocketService. Error connecting to WebSocket: SocketException: Удаленный компьютер отклонил это сетевое подключение.
+2024-11-05 09:11:54.094780: SecondMonitor. Второй монитор не подключен
+2024-11-05 10:56:03.587222: main.Произошла ошибка при проверке обновления для Windows: ClientException with SocketException: Превышен таймаут семафора.
+2024-11-05 10:56:05.757951: WebSocketService. Error connecting to WebSocket: SocketException: Удаленный компьютер отклонил это сетевое подключение.
+2024-11-05 10:56:12.376280: SecondMonitor. Второй монитор не подключен
+2024-11-05 16:55:17.513906: main.Произошла ошибка при проверке обновления для Windows: ClientException with SocketException: Превышен таймаут семафора.
+2024-11-05 16:55:21.914420: VideoManager. Video initialized.
+2024-11-05 17:20:32.309679: main.Произошла ошибка при проверке обновления для Windows: ClientException with SocketException: Превышен таймаут семафора.
+2024-11-05 17:21:05.612779: WebSocketService. Error connecting to WebSocket: SocketException: Удаленный компьютер отклонил это сетевое подключение.
+2024-11-05 17:21:08.535435: SecondMonitor. Второй монитор не подключен
+2024-11-05 17:34:19.875196: main.Произошла ошибка при проверке обновления для Windows: ClientException with SocketException: Превышен таймаут семафора.
+ (OS Error: Превышен таймаут семафора.
+, errno = 121), address = 1c.sportpoint.ru, port = 36048, uri=http://1c.sportpoint.ru:5055/seconMonitor/version.json
+2024-11-05 17:34:22.015522: WebSocketService. Error connecting to WebSocket: SocketException: Удаленный компьютер отклонил это сетевое подключение.
+ (OS Error: Удаленный компьютер отклонил это сетевое подключение.
+, errno = 1225), address = localhost, port = 36082
+2024-11-05 17:34:22.599203: SecondMonitor. Второй монитор не подключен
+2024-11-06 14:27:21.944444: main.Произошла ошибка при проверке обновления для Windows: ClientException with SocketException: Превышен таймаут семафора.
+ (OS Error: Превышен таймаут семафора.
+, errno = 121), address = 1c.sportpoint.ru, port = 1066, uri=http://1c.sportpoint.ru:5055/seconMonitor/version.json
+2024-11-06 14:27:21.990268: C:\SSM\SP.mp4
+2024-11-06 14:27:21.990268: After initialize file
+2024-11-06 14:27:21.996733: after path
+2024-11-06 14:27:22.003166: Start initialaze
+2024-11-06 14:27:22.131284: SecondMonitor. Ошибка инициализации экрана: RangeError (length): Invalid value: Only valid value is 0: 1
+2024-11-06 14:27:22.314278: After Init
+2024-11-06 14:27:22.314278: VideoManager. Video initialized.
+2024-11-06 14:27:24.136490: WebSocketService. Error connecting to WebSocket: SocketException: Удаленный компьютер отклонил это сетевое подключение.
+ (OS Error: Удаленный компьютер отклонил это сетевое подключение.
+, errno = 1225), address = localhost, port = 1088
+2024-11-06 14:38:47.753085: main.Произошла ошибка при проверке обновления для Windows: ClientException with SocketException: Превышен таймаут семафора.
+ (OS Error: Превышен таймаут семафора.
+, errno = 121), address = 1c.sportpoint.ru, port = 1739, uri=http://1c.sportpoint.ru:5055/seconMonitor/version.json
+2024-11-06 14:38:47.780371: C:\SSM\SP.mp4
+2024-11-06 14:38:47.781392: After initialize file
+2024-11-06 14:38:47.788377: after path
+2024-11-06 14:38:47.793376: Start initialaze
+2024-11-06 14:38:47.832566: SecondMonitor. Ошибка инициализации экрана: RangeError (length): Invalid value: Only valid value is 0: 1
+2024-11-06 14:38:47.920498: After Init
+2024-11-06 14:38:47.920498: VideoManager. Video initialized.
+2024-11-06 14:38:49.876430: WebSocketService. Error connecting to WebSocket: SocketException: Удаленный компьютер отклонил это сетевое подключение.
+ (OS Error: Удаленный компьютер отклонил это сетевое подключение.
+, errno = 1225), address = localhost, port = 1758
+2024-11-06 14:39:59.773271: main.Произошла ошибка при проверке обновления для Windows: ClientException with SocketException: Превышен таймаут семафора.
+ (OS Error: Превышен таймаут семафора.
+, errno = 121), address = 1c.sportpoint.ru, port = 1850, uri=http://1c.sportpoint.ru:5055/seconMonitor/version.json
+2024-11-06 14:40:10.913836: C:\SSM\SP.mp4
+2024-11-06 14:40:10.914525: After initialize file
+2024-11-06 14:40:10.923033: after path
+2024-11-06 14:40:10.927147: Start initialaze
+2024-11-06 14:40:10.997254: SecondMonitor. Ошибка инициализации экрана: RangeError (length): Invalid value: Only valid value is 0: 1
+2024-11-06 14:40:11.137915: After Init
+2024-11-06 14:40:11.138958: VideoManager. Video initialized.
+2024-11-06 14:40:13.115030: WebSocketService. Error connecting to WebSocket: SocketException: Удаленный компьютер отклонил это сетевое подключение.
+ (OS Error: Удаленный компьютер отклонил это сетевое подключение.
+, errno = 1225), address = localhost, port = 1874
+2024-11-06 14:40:56.445299: main.Произошла ошибка при проверке обновления для Windows: ClientException with SocketException: Превышен таймаут семафора.
+ (OS Error: Превышен таймаут семафора.
+, errno = 121), address = 1c.sportpoint.ru, port = 1913, uri=http://1c.sportpoint.ru:5055/seconMonitor/version.json
+2024-11-06 14:40:56.466366: C:\SSM\SP.mp4
+2024-11-06 14:40:56.467376: After initialize file
+2024-11-06 14:40:56.473377: after path
+2024-11-06 14:40:56.479278: Start initialaze
+2024-11-06 14:40:56.541052: SecondMonitor. Ошибка инициализации экрана: RangeError (length): Invalid value: Only valid value is 0: 1
+2024-11-06 14:40:56.588151: After Init
+2024-11-06 14:40:56.588151: VideoManager. Video initialized.
+2024-11-06 14:40:58.554030: WebSocketService. Error connecting to WebSocket: SocketException: Удаленный компьютер отклонил это сетевое подключение.
+ (OS Error: Удаленный компьютер отклонил это сетевое подключение.
+, errno = 1225), address = localhost, port = 1949
+2024-11-06 14:42:15.898497: main.Произошла ошибка при проверке обновления для Windows: ClientException with SocketException: Превышен таймаут семафора.
+ (OS Error: Превышен таймаут семафора.
+, errno = 121), address = 1c.sportpoint.ru, port = 2035, uri=http://1c.sportpoint.ru:5055/seconMonitor/version.json
+2024-11-06 14:42:15.919338: C:\SSM\SP.mp4
+2024-11-06 14:42:15.920444: After initialize file
+2024-11-06 14:42:15.926522: after path
+2024-11-06 14:42:15.932593: Start initialaze
+2024-11-06 14:42:34.896049: After Init
+2024-11-06 14:42:34.896049: VideoManager. Video initialized.
+2024-11-06 14:42:42.515302: SecondMonitor. Ошибка инициализации экрана: RangeError (length): Invalid value: Only valid value is 0: 1
+2024-11-06 14:42:42.520307: WebSocketService. Error connecting to WebSocket: SocketException: Удаленный компьютер отклонил это сетевое подключение.
+ (OS Error: Удаленный компьютер отклонил это сетевое подключение.
+, errno = 1225), address = localhost, port = 2055
+2024-11-06 15:58:30.167296: main.Произошла ошибка при проверке обновления для Windows: ClientException with SocketException: Превышен таймаут семафора.
+ (OS Error: Превышен таймаут семафора.
+, errno = 121), address = 1c.sportpoint.ru, port = 6400, uri=http://1c.sportpoint.ru:5055/seconMonitor/version.json
+2024-11-06 16:10:37.438745: main.Произошла ошибка при проверке обновления для Windows: ClientException with SocketException: Превышен таймаут семафора.
+ (OS Error: Превышен таймаут семафора.
+, errno = 121), address = 1c.sportpoint.ru, port = 7166, uri=http://1c.sportpoint.ru:5055/seconMonitor/version.json
+2024-11-06 16:10:37.473912: C:\SSM\SP.mp4
+2024-11-06 16:10:37.474912: After initialize file
+2024-11-06 16:10:37.481914: after path
+2024-11-06 16:10:37.486932: Start initialaze
+2024-11-06 16:10:37.520975: WebSocketServer. HTTP сервер запущен на http://localhost:4001/api/
+2024-11-06 16:10:37.522974: WebSocketServer. WebSocket сервер запущен на ws://localhost:4002/ws/
+2024-11-06 16:10:37.586900: WebSocketServer. Клиент WebSocket подключен.
+2024-11-06 16:10:37.692287: After Init
+2024-11-06 16:10:37.692287: VideoManager. Video initialized.
+2024-11-06 16:10:46.971637: SecondMonitor. Второй монитор не подключен
+2024-11-07 21:02:09.044461: main.Произошла ошибка при проверке обновления для Windows: ClientException with SocketException: Превышен таймаут семафора.
+ (OS Error: Превышен таймаут семафора.
+, errno = 121), address = 1c.sportpoint.ru, port = 10900, uri=http://1c.sportpoint.ru:5055/seconMonitor/version.json
+2024-11-07 21:02:09.109280: C:\SSM\NSP.mp4
+2024-11-07 21:02:09.110278: After initialize file
+2024-11-07 21:02:09.122984: after path
+2024-11-07 21:02:09.130302: Start initialaze
+2024-11-07 21:02:09.174961: WebSocketServer. HTTP сервер запущен на http://localhost:4001/api/
+2024-11-07 21:02:09.178675: WebSocketServer. WebSocket сервер запущен на ws://localhost:4002/ws/
+2024-11-07 21:02:09.210059: After Init
+2024-11-07 21:02:09.211188: VideoManager. Video initialized.
+2024-11-07 21:02:09.272680: WebSocketServer. Клиент WebSocket подключен.
+2024-11-07 21:02:09.278201: SecondMonitor. Ошибка инициализации экрана: NoSuchMethodError: The getter 'left' was called on null.
+Receiver: null
+Tried calling: left
+2024-11-07 21:03:42.093717: main.Произошла ошибка при проверке обновления для Windows: ClientException with SocketException: Превышен таймаут семафора.
+ (OS Error: Превышен таймаут семафора.
+, errno = 121), address = 1c.sportpoint.ru, port = 11050, uri=http://1c.sportpoint.ru:5055/seconMonitor/version.json
+2024-11-07 21:03:42.125023: C:\SSM\NSP.mp4
+2024-11-07 21:03:42.153259: After initialize file
+2024-11-07 21:03:42.165712: after path
+2024-11-07 21:03:42.176494: Start initialaze
+2024-11-07 21:04:18.387280: WebSocketServer. HTTP сервер запущен на http://localhost:4001/api/
+2024-11-07 21:04:18.397118: WebSocketServer. WebSocket сервер запущен на ws://localhost:4002/ws/
+2024-11-07 21:04:18.421521: After Init
+2024-11-07 21:04:18.422718: VideoManager. Video initialized.
+2024-11-07 21:04:18.542023: WebSocketServer. Клиент WebSocket подключен.
+2024-11-07 21:06:18.219141: SecondMonitor. Ошибка инициализации экрана: NoSuchMethodError: The getter 'left' was called on null.
+Receiver: null
+Tried calling: left
+2024-11-07 21:08:02.591895: main.Произошла ошибка при проверке обновления для Windows: ClientException with SocketException: Превышен таймаут семафора.
+ (OS Error: Превышен таймаут семафора.
+, errno = 121), address = 1c.sportpoint.ru, port = 11286, uri=http://1c.sportpoint.ru:5055/seconMonitor/version.json
+2024-11-07 21:08:02.648105: C:\SSM\NSP.mp4
+2024-11-07 21:08:02.649080: After initialize file
+2024-11-07 21:08:02.660200: after path
+2024-11-07 21:08:02.667450: Start initialaze
+2024-11-07 21:08:07.210977: WebSocketServer. HTTP сервер запущен на http://localhost:4001/api/
+2024-11-07 21:08:07.217571: WebSocketServer. WebSocket сервер запущен на ws://localhost:4002/ws/
+2024-11-07 21:08:07.230753: After Init
+2024-11-07 21:08:07.231663: VideoManager. Video initialized.
+2024-11-07 21:08:07.352947: WebSocketServer. Клиент WebSocket подключен.
+2024-11-07 21:18:52.934729: SecondMonitor. Ошибка инициализации экрана: NoSuchMethodError: The getter 'left' was called on null.
+Receiver: null
+Tried calling: left
+2024-11-07 21:19:15.571007: main.Произошла ошибка при проверке обновления для Windows: ClientException with SocketException: Превышен таймаут семафора.
+ (OS Error: Превышен таймаут семафора.
+, errno = 121), address = 1c.sportpoint.ru, port = 12168, uri=http://1c.sportpoint.ru:5055/seconMonitor/version.json
+2024-11-07 21:19:15.592903: C:\SSM\NSP.mp4
+2024-11-07 21:19:15.593943: After initialize file
+2024-11-07 21:19:15.604539: after path
+2024-11-07 21:19:15.611063: Start initialaze
+2024-11-07 21:19:21.313860: WebSocketServer. HTTP сервер запущен на http://localhost:4001/api/
+2024-11-07 21:19:21.322903: WebSocketServer. WebSocket сервер запущен на ws://localhost:4002/ws/
+2024-11-07 21:19:21.376252: After Init
+2024-11-07 21:19:21.377265: VideoManager. Video initialized.
+2024-11-07 21:19:21.513307: WebSocketServer. Клиент WebSocket подключен.
+2024-11-07 21:35:04.449511: main.Произошла ошибка при проверке обновления для Windows: ClientException with SocketException: Превышен таймаут семафора.
+ (OS Error: Превышен таймаут семафора.
+, errno = 121), address = 1c.sportpoint.ru, port = 13055, uri=http://1c.sportpoint.ru:5055/seconMonitor/version.json
+2024-11-07 21:35:04.510379: C:\SSM\NSP.mp4
+2024-11-07 21:35:04.510379: After initialize file
+2024-11-07 21:35:04.528653: after path
+2024-11-07 21:35:04.544419: Start initialaze
+2024-11-07 21:35:04.658476: WebSocketServer. HTTP сервер запущен на http://localhost:4001/api/
+2024-11-07 21:35:04.667178: WebSocketServer. WebSocket сервер запущен на ws://localhost:4002/ws/
+2024-11-07 21:35:04.807200: WebSocketServer. Клиент WebSocket подключен.
+2024-11-07 21:35:04.815413: After Init
+2024-11-07 21:35:04.827031: VideoManager. Video initialized.
+2024-11-07 21:36:13.420594: main.Произошла ошибка при проверке обновления для Windows: ClientException with SocketException: Превышен таймаут семафора.
+ (OS Error: Превышен таймаут семафора.
+, errno = 121), address = 1c.sportpoint.ru, port = 13148, uri=http://1c.sportpoint.ru:5055/seconMonitor/version.json
+2024-11-07 21:36:13.477119: C:\SSM\NSP.mp4
+2024-11-07 21:36:13.477119: After initialize file
+2024-11-07 21:36:13.492086: after path
+2024-11-07 21:36:13.502980: Start initialaze
+2024-11-07 21:36:16.843622: WebSocketServer. HTTP сервер запущен на http://localhost:4001/api/
+2024-11-07 21:36:16.850627: WebSocketServer. WebSocket сервер запущен на ws://localhost:4002/ws/
+2024-11-07 21:36:16.863966: After Init
+2024-11-07 21:36:16.864966: VideoManager. Video initialized.
+2024-11-07 21:36:17.005292: WebSocketServer. Клиент WebSocket подключен.
+2024-11-07 21:40:29.447058: main.Произошла ошибка при проверке обновления для Windows: ClientException with SocketException: Превышен таймаут семафора.
+ (OS Error: Превышен таймаут семафора.
+, errno = 121), address = 1c.sportpoint.ru, port = 13401, uri=http://1c.sportpoint.ru:5055/seconMonitor/version.json
+2024-11-07 21:40:29.520441: C:\SSM\NSP.mp4
+2024-11-07 21:40:29.520441: After initialize file
+2024-11-07 21:40:29.533528: after path
+2024-11-07 21:40:29.539540: Start initialaze
+2024-11-07 21:41:04.947859: WebSocketServer. HTTP сервер запущен на http://localhost:4001/api/
+2024-11-07 21:41:04.955354: WebSocketServer. WebSocket сервер запущен на ws://localhost:4002/ws/
+2024-11-07 21:41:05.010163: After Init
+2024-11-07 21:41:05.011675: VideoManager. Video initialized.
+2024-11-07 21:41:05.140660: WebSocketServer. Клиент WebSocket подключен.
+2024-11-07 21:42:49.786080: main.Произошла ошибка при проверке обновления для Windows: ClientException with SocketException: Превышен таймаут семафора.
+ (OS Error: Превышен таймаут семафора.
+, errno = 121), address = 1c.sportpoint.ru, port = 13534, uri=http://1c.sportpoint.ru:5055/seconMonitor/version.json
+2024-11-07 21:42:49.832659: C:\SSM\NSP.mp4
+2024-11-07 21:42:49.832659: After initialize file
+2024-11-07 21:42:49.843322: after path
+2024-11-07 21:42:49.850279: Start initialaze
+2024-11-07 21:42:56.794114: WebSocketServer. HTTP сервер запущен на http://localhost:4001/api/
+2024-11-07 21:42:56.801654: WebSocketServer. WebSocket сервер запущен на ws://localhost:4002/ws/
+2024-11-07 21:42:56.815476: After Init
+2024-11-07 21:42:56.816578: VideoManager. Video initialized.
+2024-11-07 21:42:56.945722: WebSocketServer. Клиент WebSocket подключен.
+2024-11-07 21:46:26.597139: main.Произошла ошибка при проверке обновления для Windows: ClientException with SocketException: Превышен таймаут семафора.
+ (OS Error: Превышен таймаут семафора.
+, errno = 121), address = 1c.sportpoint.ru, port = 13721, uri=http://1c.sportpoint.ru:5055/seconMonitor/version.json
+2024-11-07 21:46:26.650696: C:\SSM\NSP.mp4
+2024-11-07 21:46:26.651322: After initialize file
+2024-11-07 21:46:26.662754: after path
+2024-11-07 21:46:26.670750: Start initialaze
+2024-11-07 21:46:30.759766: WebSocketServer. HTTP сервер запущен на http://localhost:4001/api/
+2024-11-07 21:46:30.768526: WebSocketServer. WebSocket сервер запущен на ws://localhost:4002/ws/
+2024-11-07 21:46:30.785380: After Init
+2024-11-07 21:46:30.787376: VideoManager. Video initialized.
+2024-11-07 21:46:30.924302: WebSocketServer. Клиент WebSocket подключен.
+2024-11-08 13:50:12.078527: main.Произошла ошибка при проверке обновления для Windows: ClientException with SocketException: Превышен таймаут семафора.
+ (OS Error: Превышен таймаут семафора.
+, errno = 121), address = 1c.sportpoint.ru, port = 5229, uri=http://1c.sportpoint.ru:5055/seconMonitor/version.json
+2024-11-08 13:50:12.109909: C:\SSM\NSP.mp4
+2024-11-08 13:50:12.109909: After initialize file
+2024-11-08 13:50:12.116420: after path
+2024-11-08 13:50:12.121524: Start initialaze
+2024-11-08 13:54:26.022705: main.Произошла ошибка при проверке обновления для Windows: ClientException with SocketException: Превышен таймаут семафора.
+ (OS Error: Превышен таймаут семафора.
+, errno = 121), address = 1c.sportpoint.ru, port = 5661, uri=http://1c.sportpoint.ru:5055/seconMonitor/version.json
+2024-11-08 13:54:26.043206: C:\SSM\NSP.mp4
+2024-11-08 13:54:26.043206: After initialize file
+2024-11-08 13:54:26.050504: after path
+2024-11-08 13:54:26.056592: Start initialaze
+2024-11-08 13:54:31.643523: WebSocketServer. HTTP сервер запущен на http://localhost:4001/api/
+2024-11-08 13:54:31.646529: WebSocketServer. WebSocket сервер запущен на ws://localhost:4002/ws/
+2024-11-08 13:54:31.658051: After Init
+2024-11-08 13:54:31.665042: VideoManager. Video initialized.
+2024-11-08 13:54:31.714121: WebSocketServer. Клиент WebSocket подключен.
+2024-11-08 13:55:10.622014: SecondMonitor. Ошибка инициализации экрана: NoSuchMethodError: The getter 'left' was called on null.
+Receiver: null
+Tried calling: left
+2024-11-08 14:03:24.853661: main.Произошла ошибка при проверке обновления для Windows: ClientException with SocketException: Превышен таймаут семафора.
+ (OS Error: Превышен таймаут семафора.
+, errno = 121), address = 1c.sportpoint.ru, port = 6485, uri=http://1c.sportpoint.ru:5055/seconMonitor/version.json
+2024-11-08 14:03:24.878519: C:\SSM\NSP.mp4
+2024-11-08 14:03:24.879518: After initialize file
+2024-11-08 14:03:24.886801: after path
+2024-11-08 14:03:24.891849: Start initialaze
+2024-11-08 14:03:44.418391: WebSocketServer. HTTP сервер запущен на http://localhost:4001/api/
+2024-11-08 14:03:44.421392: WebSocketServer. WebSocket сервер запущен на ws://localhost:4002/ws/
+2024-11-08 14:03:44.427391: After Init
+2024-11-08 14:03:44.431429: VideoManager. Video initialized.
+2024-11-08 14:03:44.474576: WebSocketServer. Клиент WebSocket подключен.
+2024-11-08 16:15:15.907232: main.Произошла ошибка при проверке обновления для Windows: ClientException with SocketException: Превышен таймаут семафора.
+ (OS Error: Превышен таймаут семафора.
+, errno = 121), address = 1c.sportpoint.ru, port = 18167, uri=http://1c.sportpoint.ru:5055/seconMonitor/version.json
+2024-11-08 16:15:15.930107: C:\SSM\NSP.mp4
+2024-11-08 16:15:15.930107: After initialize file
+2024-11-08 16:15:15.935847: after path
+2024-11-08 16:15:15.940900: Start initialaze
+2024-11-08 16:15:15.972978: WebSocketServer. HTTP сервер запущен на http://localhost:4001/api/
+2024-11-08 16:15:15.976215: WebSocketServer. WebSocket сервер запущен на ws://localhost:4002/ws/
+2024-11-08 16:15:16.033469: WebSocketServer. Клиент WebSocket подключен.
+2024-11-08 16:15:16.101186: After Init
+2024-11-08 16:15:16.101469: VideoManager. Video initialized.
+2024-11-08 16:30:34.265910: SecondMonitor. Ошибка инициализации экрана: No MaterialLocalizations found.
+MyApp widgets require MaterialLocalizations to be provided by a Localizations widget ancestor.
+The material library uses Localizations to generate messages, labels, and abbreviations.
+To introduce a MaterialLocalizations, either use a MaterialApp at the root of your application to include them automatically, or add a Localization widget with a MaterialLocalizations delegate.
+The specific widget that could not find a MaterialLocalizations ancestor was:
+  MyApp
+The ancestors of this widget were:
+  _FocusInheritedScope
+  _FocusScopeWithExternalFocusNode
+  _FocusInheritedScope
+  Focus
+  FocusTraversalGroup
+  MediaQuery
+  _MediaQueryFromView
+  _PipelineOwnerScope
+  _ViewScope
+  _RawViewInternal-[_DeprecatedRawViewKey FlutterView#edfa7]
+  RawView
+  View
+  [root]
+2024-11-08 16:30:55.314074: main.Произошла ошибка при проверке обновления для Windows: ClientException with SocketException: Превышен таймаут семафора.
+ (OS Error: Превышен таймаут семафора.
+, errno = 121), address = 1c.sportpoint.ru, port = 36205, uri=http://1c.sportpoint.ru:5055/seconMonitor/version.json
+2024-11-08 16:30:55.331431: C:\SSM\NSP.mp4
+2024-11-08 16:30:55.331431: After initialize file
+2024-11-08 16:30:55.337034: after path
+2024-11-08 16:30:55.343034: Start initialaze
+2024-11-08 16:30:55.375068: WebSocketServer. HTTP сервер запущен на http://localhost:4001/api/
+2024-11-08 16:30:55.377068: WebSocketServer. WebSocket сервер запущен на ws://localhost:4002/ws/
+2024-11-08 16:30:55.423203: WebSocketServer. Клиент WebSocket подключен.
+2024-11-08 16:30:55.447700: After Init
+2024-11-08 16:30:55.447700: VideoManager. Video initialized.
+2024-11-08 16:36:28.769327: main.Произошла ошибка при проверке обновления для Windows: ClientException with SocketException: Превышен таймаут семафора.
+ (OS Error: Превышен таймаут семафора.
+, errno = 121), address = 1c.sportpoint.ru, port = 36834, uri=http://1c.sportpoint.ru:5055/seconMonitor/version.json
+2024-11-08 16:36:28.795361: C:\SSM\NSP.mp4
+2024-11-08 16:36:28.796474: After initialize file
+2024-11-08 16:36:28.803366: after path
+2024-11-08 16:36:28.808366: Start initialaze
+2024-11-08 16:36:28.844132: WebSocketServer. HTTP сервер запущен на http://localhost:4001/api/
+2024-11-08 16:36:28.846137: WebSocketServer. WebSocket сервер запущен на ws://localhost:4002/ws/
+2024-11-08 16:36:28.936753: After Init
+2024-11-08 16:36:28.936753: VideoManager. Video initialized.
+2024-11-08 16:36:28.965696: WebSocketServer. Клиент WebSocket подключен.
+2024-11-08 16:52:33.743082: main.Произошла ошибка при проверке обновления для Windows: ClientException with SocketException: Превышен таймаут семафора.
+ (OS Error: Превышен таймаут семафора.
+, errno = 121), address = 1c.sportpoint.ru, port = 38425, uri=http://1c.sportpoint.ru:5055/seconMonitor/version.json
+2024-11-08 16:52:33.759224: C:\SSM\NSP.mp4
+2024-11-08 16:52:33.760224: After initialize file
+2024-11-08 16:52:33.768409: after path
+2024-11-08 16:52:33.774337: Start initialaze
+2024-11-08 16:52:39.653450: WebSocketServer. HTTP сервер запущен на http://localhost:4001/api/
+2024-11-08 16:52:39.656433: WebSocketServer. WebSocket сервер запущен на ws://localhost:4002/ws/
+2024-11-08 16:52:39.666045: After Init
+2024-11-08 16:52:39.667988: VideoManager. Video initialized.
+2024-11-08 16:52:39.715016: WebSocketServer. Клиент WebSocket подключен.
+2024-11-08 16:53:26.972282: SecondMonitor. Ошибка инициализации экрана: NoSuchMethodError: The getter 'left' was called on null.
+Receiver: null
+Tried calling: left
+2024-11-08 17:00:52.607751: main.Произошла ошибка при проверке обновления для Windows: ClientException with SocketException: Превышен таймаут семафора.
+ (OS Error: Превышен таймаут семафора.
+, errno = 121), address = 1c.sportpoint.ru, port = 39159, uri=http://1c.sportpoint.ru:5055/seconMonitor/version.json
+2024-11-08 17:00:52.632453: C:\SSM\NSP.mp4
+2024-11-08 17:00:52.632453: After initialize file
+2024-11-08 17:00:52.640435: after path
+2024-11-08 17:00:52.645432: Start initialaze
+2024-11-08 17:00:55.515172: WebSocketServer. HTTP сервер запущен на http://localhost:4001/api/
+2024-11-08 17:00:55.517169: WebSocketServer. WebSocket сервер запущен на ws://localhost:4002/ws/
+2024-11-08 17:00:55.526255: After Init
+2024-11-08 17:00:55.528236: VideoManager. Video initialized.
+2024-11-08 17:00:55.572516: WebSocketServer. Клиент WebSocket подключен.
+2024-11-08 17:02:17.950809: main.Произошла ошибка при проверке обновления для Windows: ClientException with SocketException: Превышен таймаут семафора.
+ (OS Error: Превышен таймаут семафора.
+, errno = 121), address = 1c.sportpoint.ru, port = 39318, uri=http://1c.sportpoint.ru:5055/seconMonitor/version.json
+2024-11-08 17:02:17.973624: C:\SSM\NSP.mp4
+2024-11-08 17:02:17.974627: After initialize file
+2024-11-08 17:02:17.980519: after path
+2024-11-08 17:02:17.985620: Start initialaze
+2024-11-08 17:02:19.938405: WebSocketServer. HTTP сервер запущен на http://localhost:4001/api/
+2024-11-08 17:02:19.941411: WebSocketServer. WebSocket сервер запущен на ws://localhost:4002/ws/
+2024-11-08 17:02:19.950411: After Init
+2024-11-08 17:02:19.951411: VideoManager. Video initialized.
+2024-11-08 17:02:19.991229: WebSocketServer. Клиент WebSocket подключен.
+2024-11-08 17:03:01.922089: main.Произошла ошибка при проверке обновления для Windows: ClientException with SocketException: Превышен таймаут семафора.
+ (OS Error: Превышен таймаут семафора.
+, errno = 121), address = 1c.sportpoint.ru, port = 39384, uri=http://1c.sportpoint.ru:5055/seconMonitor/version.json
+2024-11-08 17:03:01.947403: C:\SSM\NSP.mp4
+2024-11-08 17:03:01.948234: After initialize file
+2024-11-08 17:03:01.954309: after path
+2024-11-08 17:03:01.960417: Start initialaze
+2024-11-08 17:03:04.791933: WebSocketServer. HTTP сервер запущен на http://localhost:4001/api/
+2024-11-08 17:03:04.794916: WebSocketServer. WebSocket сервер запущен на ws://localhost:4002/ws/
+2024-11-08 17:03:04.805022: After Init
+2024-11-08 17:03:04.805917: VideoManager. Video initialized.
+2024-11-08 17:03:04.846471: WebSocketServer. Клиент WebSocket подключен.
+2024-11-08 17:03:39.964053: main.Произошла ошибка при проверке обновления для Windows: ClientException with SocketException: Превышен таймаут семафора.
+ (OS Error: Превышен таймаут семафора.
+, errno = 121), address = 1c.sportpoint.ru, port = 39456, uri=http://1c.sportpoint.ru:5055/seconMonitor/version.json
+2024-11-08 17:03:39.988399: C:\SSM\NSP.mp4
+2024-11-08 17:03:39.988399: After initialize file
+2024-11-08 17:03:39.997399: after path
+2024-11-08 17:03:40.004498: Start initialaze
+2024-11-08 17:03:42.618198: WebSocketServer. HTTP сервер запущен на http://localhost:4001/api/
+2024-11-08 17:03:42.621199: WebSocketServer. WebSocket сервер запущен на ws://localhost:4002/ws/
+2024-11-08 17:03:42.630342: After Init
+2024-11-08 17:03:42.632308: VideoManager. Video initialized.
+2024-11-08 17:03:42.675098: WebSocketServer. Клиент WebSocket подключен.
+2024-11-08 18:05:16.356572: main.Произошла ошибка при проверке обновления для Windows: ClientException with SocketException: Превышен таймаут семафора.
+ (OS Error: Превышен таймаут семафора.
+, errno = 121), address = 1c.sportpoint.ru, port = 44973, uri=http://1c.sportpoint.ru:5055/seconMonitor/version.json
+2024-11-08 18:05:16.379102: C:\SSM\NSP.mp4
+2024-11-08 18:05:16.380148: After initialize file
+2024-11-08 18:05:16.386108: after path
+2024-11-08 18:05:16.391244: Start initialaze
+2024-11-08 18:05:16.424180: WebSocketServer. HTTP сервер запущен на http://localhost:4001/api/
+2024-11-08 18:05:16.426181: WebSocketServer. WebSocket сервер запущен на ws://localhost:4002/ws/
+2024-11-08 18:05:16.458296: SecondMonitor. Ошибка инициализации экрана: NoSuchMethodError: The getter 'left' was called on null.
+Receiver: null
+Tried calling: left
+2024-11-08 18:05:16.484918: WebSocketServer. Клиент WebSocket подключен.
+2024-11-08 18:05:16.543447: After Init
+2024-11-08 18:05:16.544448: VideoManager. Video initialized.
+2024-11-08 18:06:46.641730: main.Произошла ошибка при проверке обновления для Windows: ClientException with SocketException: Превышен таймаут семафора.
+ (OS Error: Превышен таймаут семафора.
+, errno = 121), address = 1c.sportpoint.ru, port = 45129, uri=http://1c.sportpoint.ru:5055/seconMonitor/version.json
+2024-11-08 18:06:46.658655: C:\SSM\NSP.mp4
+2024-11-08 18:06:46.666133: After initialize file
+2024-11-08 18:06:46.672034: after path
+2024-11-08 18:06:46.677050: Start initialaze
+2024-11-08 18:06:49.010313: WebSocketServer. HTTP сервер запущен на http://localhost:4001/api/
+2024-11-08 18:06:49.012337: WebSocketServer. WebSocket сервер запущен на ws://localhost:4002/ws/
+2024-11-08 18:06:49.020882: After Init
+2024-11-08 18:06:49.022857: VideoManager. Video initialized.
+2024-11-08 18:06:49.067861: WebSocketServer. Клиент WebSocket подключен.
+2024-12-10 19:35:35.376716: main.Произошла ошибка при проверке обновления для Windows: ClientException with SocketException: Превышен таймаут семафора.
+ (OS Error: Превышен таймаут семафора.
+, errno = 121), address = 1c.sportpoint.ru, port = 20625, uri=http://1c.sportpoint.ru:5055/seconMonitor/version.json
+2024-12-10 19:39:38.376415: main.Произошла ошибка при проверке обновления для Windows: ClientException with SocketException: Превышен таймаут семафора.
+ (OS Error: Превышен таймаут семафора.
+, errno = 121), address = 1c.sportpoint.ru, port = 20831, uri=http://1c.sportpoint.ru:5055/seconMonitor/version.json
+2024-12-10 19:39:38.400806: C:\SSM\NSP.mp4
+2024-12-10 19:39:38.400806: After initialize file
+2024-12-10 19:39:38.408611: after path
+2024-12-10 19:39:38.414778: Start initialaze
+2024-12-10 19:39:38.445100: WebSocketServer. HTTP сервер запущен на http://localhost:4001/api/
+2024-12-10 19:39:38.448090: WebSocketServer. WebSocket сервер запущен на ws://localhost:4002/ws/
+2024-12-10 19:39:38.495847: WebSocketServer. Клиент WebSocket подключен.
+2024-12-10 19:39:38.536475: After Init
+2024-12-10 19:39:38.536475: VideoManager. Video initialized.
+2024-12-10 19:42:01.476451: main.Произошла ошибка при проверке обновления для Windows: ClientException with SocketException: Превышен таймаут семафора.
+ (OS Error: Превышен таймаут семафора.
+, errno = 121), address = 1c.sportpoint.ru, port = 20968, uri=http://1c.sportpoint.ru:5055/seconMonitor/version.json
+2024-12-10 20:02:11.275876: C:\SSM\NSP.mp4
+2024-12-10 20:02:11.279877: After initialize file
+2024-12-10 20:02:11.288385: after path
+2024-12-10 20:02:11.293383: Start initialaze
+2024-12-10 20:02:11.325341: WebSocketServer. HTTP сервер запущен на http://localhost:4001/api/
+2024-12-10 20:02:11.330789: WebSocketServer. WebSocket сервер запущен на ws://localhost:4002/ws/
+2024-12-10 20:02:11.397351: After Init
+2024-12-10 20:02:11.397351: VideoManager. Video initialized.
+2024-12-10 20:02:11.417372: WebSocketServer. Клиент WebSocket подключен.
+2024-12-10 20:02:52.960159: C:\SSM\NSP.mp4
+2024-12-10 20:02:52.963145: After initialize file
+2024-12-10 20:02:52.971143: after path
+2024-12-10 20:02:52.976652: Start initialaze
+2024-12-10 20:02:53.007326: WebSocketServer. HTTP сервер запущен на http://localhost:4001/api/
+2024-12-10 20:02:53.013331: WebSocketServer. WebSocket сервер запущен на ws://localhost:4002/ws/
+2024-12-10 20:02:53.092277: WebSocketServer. Клиент WebSocket подключен.
+2024-12-10 20:02:53.095278: After Init
+2024-12-10 20:02:53.102280: VideoManager. Video initialized.
+2024-12-10 20:46:51.351081: WebSocketServer. HTTP сервер запущен на http://localhost:4001/api/
+2024-12-10 20:46:51.358973: WebSocketServer. WebSocket сервер запущен на ws://localhost:4002/ws/
+2024-12-10 20:46:51.419601: WebSocketServer. Клиент WebSocket подключен.
+2024-12-10 20:46:51.420500: C:\SSM\NSP.mp4
+2024-12-10 20:46:51.426500: After initialize file
+2024-12-10 20:46:51.433502: after path
+2024-12-10 20:46:51.438499: Start initialaze
+2024-12-10 20:46:51.550207: After Init
+2024-12-10 20:46:51.550207: VideoManager. Video initialized.
+2024-12-10 21:07:47.559841: WebSocketServer. HTTP сервер запущен на http://localhost:4001/api/
+2024-12-10 21:07:47.570731: WebSocketServer. WebSocket сервер запущен на ws://localhost:4002/ws/
+2024-12-10 21:07:47.635426: WebSocketServer. Клиент WebSocket подключен.
+2024-12-10 21:07:47.641441: C:\SSM\NSP.mp4
+2024-12-10 21:07:47.643445: After initialize file
+2024-12-10 21:07:47.650425: after path
+2024-12-10 21:07:47.656423: Start initialaze
+2024-12-10 21:07:47.921913: After Init
+2024-12-10 21:07:47.921913: VideoManager. Video initialized.
+2024-12-10 21:17:07.078335: WebSocketServer. HTTP сервер запущен на http://localhost:4001/api/
+2024-12-10 21:17:07.085317: WebSocketServer. WebSocket сервер запущен на ws://localhost:4002/ws/
+2024-12-10 21:17:07.143142: WebSocketServer. Клиент WebSocket подключен.
+2024-12-10 21:17:07.144142: C:\SSM\NSP.mp4
+2024-12-10 21:17:07.151259: After initialize file
+2024-12-10 21:17:07.158142: after path
+2024-12-10 21:17:07.163240: Start initialaze
+2024-12-10 21:17:07.404218: After Init
+2024-12-10 21:17:07.405218: VideoManager. Video initialized.
+2024-12-10 21:27:04.742730: WebSocketServer. HTTP сервер запущен на http://localhost:4001/api/
+2024-12-10 21:27:04.752730: WebSocketServer. WebSocket сервер запущен на ws://localhost:4002/ws/
+2024-12-10 21:27:04.763240: C:\SSM\NSP.mp4
+2024-12-10 21:27:04.765647: After initialize file
+2024-12-10 21:27:04.771893: after path
+2024-12-10 21:27:04.777896: Start initialaze
+2024-12-10 21:27:04.844602: WebSocketServer. Клиент WebSocket подключен.
+2024-12-10 21:27:04.899135: After Init
+2024-12-10 21:27:04.899135: VideoManager. Video initialized.
+2024-12-10 21:27:42.975046: WebSocketServer. HTTP сервер запущен на http://localhost:4001/api/
+2024-12-10 21:27:42.985275: WebSocketServer. WebSocket сервер запущен на ws://localhost:4002/ws/
+2024-12-10 21:27:42.989464: C:\SSM\NSP.mp4
+2024-12-10 21:27:42.991921: After initialize file
+2024-12-10 21:27:42.998922: after path
+2024-12-10 21:27:43.003939: Start initialaze
+2024-12-10 21:27:43.067875: WebSocketServer. Клиент WebSocket подключен.
+2024-12-10 21:27:43.101284: After Init
+2024-12-10 21:27:43.101284: VideoManager. Video initialized.
+2024-12-10 21:28:19.897899: WebSocketServer. HTTP сервер запущен на http://localhost:4001/api/
+2024-12-10 21:28:19.903800: WebSocketServer. WebSocket сервер запущен на ws://localhost:4002/ws/
+2024-12-10 21:28:19.910799: C:\SSM\NSP.mp4
+2024-12-10 21:28:19.913800: After initialize file
+2024-12-10 21:28:19.920802: after path
+2024-12-10 21:28:19.926829: Start initialaze
+2024-12-10 21:28:19.994060: WebSocketServer. Клиент WebSocket подключен.
+2024-12-10 21:28:20.019260: After Init
+2024-12-10 21:28:20.020268: VideoManager. Video initialized.
+2024-12-10 21:33:12.942558: WebSocketServer. HTTP сервер запущен на http://localhost:4001/api/
+2024-12-10 21:33:12.946557: WebSocketServer. WebSocket сервер запущен на ws://localhost:4002/ws/
+2024-12-10 21:33:12.957557: C:\VideoASP.mp4
+2024-12-10 21:33:12.959558: After initialize file
+2024-12-10 21:33:12.966087: after path
+2024-12-10 21:33:12.972087: Start initialaze
+2024-12-10 21:33:13.031605: After Init
+2024-12-10 21:33:13.032582: VideoManager. Video initialized.
+2024-12-10 21:33:13.052182: WebSocketServer. Клиент WebSocket подключен.
+2024-12-10 21:33:41.128279: WebSocketServer. HTTP сервер запущен на http://localhost:4001/api/
+2024-12-10 21:33:41.136169: WebSocketServer. WebSocket сервер запущен на ws://localhost:4002/ws/
+2024-12-10 21:33:41.143169: C:\VideoNSP.mp4
+2024-12-10 21:33:41.146167: After initialize file
+2024-12-10 21:33:41.154167: after path
+2024-12-10 21:33:41.160167: Start initialaze
+2024-12-10 21:33:41.222564: After Init
+2024-12-10 21:33:41.222564: VideoManager. Video initialized.
+2024-12-10 21:33:41.240588: WebSocketServer. Клиент WebSocket подключен.
+2024-12-10 21:34:06.018443: WebSocketServer. HTTP сервер запущен на http://localhost:4001/api/
+2024-12-10 21:34:06.026339: WebSocketServer. WebSocket сервер запущен на ws://localhost:4002/ws/
+2024-12-10 21:34:06.031339: C:\SSMNSP.mp4
+2024-12-10 21:34:06.035447: After initialize file
+2024-12-10 21:34:06.043339: after path
+2024-12-10 21:34:06.048354: Start initialaze
+2024-12-10 21:34:06.114585: After Init
+2024-12-10 21:34:06.114585: VideoManager. Video initialized.
+2024-12-10 21:34:06.126061: WebSocketServer. Клиент WebSocket подключен.
+2024-12-10 21:36:33.945216: WebSocketServer. HTTP сервер запущен на http://localhost:4001/api/
+2024-12-10 21:36:33.952216: WebSocketServer. WebSocket сервер запущен на ws://localhost:4002/ws/
+2024-12-10 21:36:48.266202: C:\SSMNSP.mp4
+2024-12-10 21:36:48.267173: After initialize file
+2024-12-10 21:36:48.276107: after path
+2024-12-10 21:36:48.282172: Start initialaze
+2024-12-10 21:37:00.047168: After Init
+2024-12-10 21:37:00.047168: VideoManager. Video initialized.
+2024-12-10 21:37:08.422587: WebSocketServer. Клиент WebSocket подключен.
+2024-12-10 21:38:38.087975: WebSocketServer. HTTP сервер запущен на http://localhost:4001/api/
+2024-12-10 21:38:38.092442: WebSocketServer. WebSocket сервер запущен на ws://localhost:4002/ws/
+2024-12-10 21:38:38.101292: C:\SSM\NSP.mp4
+2024-12-10 21:38:38.104293: After initialize file
+2024-12-10 21:38:38.111292: after path
+2024-12-10 21:38:38.116306: Start initialaze
+2024-12-10 21:38:38.180404: WebSocketServer. Клиент WebSocket подключен.
+2024-12-10 21:38:38.223405: After Init
+2024-12-10 21:38:38.224405: VideoManager. Video initialized.
+2024-12-10 21:57:19.953302: WebSocketServer. HTTP сервер запущен на http://localhost:4001/api/
+2024-12-10 21:57:19.964749: WebSocketServer. WebSocket сервер запущен на ws://localhost:4002/ws/
+2024-12-10 21:57:19.972084: C:\SSM\NSP.mp4
+2024-12-10 21:57:19.976595: After initialize file
+2024-12-10 21:57:19.988054: after path
+2024-12-10 21:57:19.998051: Start initialaze
+2024-12-10 21:57:20.101182: WebSocketServer. Клиент WebSocket подключен.
+2024-12-10 21:57:20.190513: After Init
+2024-12-10 21:57:20.190513: VideoManager. Video initialized.
+2024-12-11 14:14:58.884619: WebSocketServer. HTTP сервер запущен на http://localhost:4001/api/
+2024-12-11 14:14:58.912484: WebSocketServer. WebSocket сервер запущен на ws://localhost:4002/ws/
+2024-12-11 14:14:58.919477: C:\SSM\NSP.mp4
+2024-12-11 14:14:58.922470: After initialize file
+2024-12-11 14:14:58.932627: after path
+2024-12-11 14:14:58.940086: Start initialaze
+2024-12-11 14:14:59.041585: WebSocketServer. Клиент WebSocket подключен.
+2024-12-11 14:14:59.165002: After Init
+2024-12-11 14:14:59.166010: VideoManager. Video initialized.
+2024-12-11 15:47:45.971145: WebSocketServer. HTTP сервер запущен на http://localhost:4001/api/
+2024-12-11 15:47:45.976841: WebSocketServer. WebSocket сервер запущен на ws://localhost:4002/ws/
+2024-12-11 15:47:45.984588: C:\SSM\NSP.mp4
+2024-12-11 15:47:45.986690: After initialize file
+2024-12-11 15:47:45.994007: after path
+2024-12-11 15:47:45.999003: Start initialaze
+2024-12-11 15:47:46.062697: WebSocketServer. Клиент WebSocket подключен.
+2024-12-11 15:47:46.105399: After Init
+2024-12-11 15:47:46.105399: VideoManager. Video initialized.
+2024-12-11 16:03:45.153589: WebSocketServer. HTTP сервер запущен на http://localhost:4001/api/
+2024-12-11 16:03:45.166609: WebSocketServer. WebSocket сервер запущен на ws://localhost:4002/ws/
+2024-12-11 16:03:45.174602: C:\SSM\NSP.mp4
+2024-12-11 16:03:45.175611: After initialize file
+2024-12-11 16:03:45.182158: after path
+2024-12-11 16:03:45.188548: Start initialaze
+2024-12-11 16:03:45.318567: WebSocketServer. Клиент WebSocket подключен.
+2024-12-11 16:03:45.541267: After Init
+2024-12-11 16:03:45.542084: VideoManager. Video initialized.
