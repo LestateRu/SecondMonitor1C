@@ -1,7 +1,9 @@
 import 'dart:convert';
 import 'dart:io';
+import 'package:path_provider/path_provider.dart';
 import 'package:screen_retriever/screen_retriever.dart';
 import 'package:second_monitor/Service/VideoManager.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:window_manager/window_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:qr_flutter/qr_flutter.dart';
@@ -16,12 +18,38 @@ import 'package:second_monitor/Service/logger.dart';
 import 'package:second_monitor/Service/Server.dart';
 
 
+class Settings {
+  String brand;
+  bool fullscreen;
+  String videoPath;
+
+  Settings({required this.brand, required this.fullscreen, required this.videoPath});
+
+  factory Settings.fromJson(Map<String, dynamic> json) {
+    return Settings(
+      brand: json['brand'] ?? 'SP',
+      fullscreen: json['fullscreen'] ?? false,
+      videoPath: json['videoPath'] ?? 'C:\\SSM\\',
+    );
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'brand': brand,
+      'fullscreen': fullscreen,
+      'videoPath': videoPath,
+    };
+  }
+}
+
+
 class SecondMonitor extends StatefulWidget {
   @override
   _SecondMonitorState createState() => _SecondMonitorState();
 }
 
 class _SecondMonitorState extends State<SecondMonitor> {
+  late Settings _settings;
   late WebSocketService _webSocketService;
   late Server _server;
   LoyaltyProgram? _loyaltyProgram;
@@ -31,65 +59,70 @@ class _SecondMonitorState extends State<SecondMonitor> {
   Brend? _brend;
   late VideoManager _videoManager;
 
-
   @override
   void initState() {
     super.initState();
+
     _server = Server();
     _server.startServer();
     _webSocketService = WebSocketService();
     _webSocketService.setOnDataReceived(_onDataReceived);
     _webSocketService.connect('ws://localhost:4002/ws/');
     _videoManager = VideoManager();
+    _loadSettings().then((_) {
     _initializeVideo();
-    _initFullScreen();
-
-    //_scheduleDailyVideoCheck();
+    _initFullScreen();});
   }
 
+  /// Загружает настройки из SharedPreferences
+  Future<void> _loadSettings() async {
+    try {
+      final prefs = await SharedPreferences.getInstance();
+      String? brand = prefs.getString('selectedBrand');
+      bool? fullscreen = prefs.getBool('isFullScreen');
+      String? videoPath = prefs.getString('videoFolder');
 
-
-  void _initFullScreen() async {
-      await windowManager.ensureInitialized();
-      List<Display> displays = await screenRetriever.getAllDisplays();
-        await windowManager.setFullScreen(true);
-  }
-
-
-  void _initializeVideo() {
-    if (_brend != null) {
-      _videoManager.initialize('C:\\SSM\\${_brend?.brendName}.mp4').then((value) {
-        setState(() {});
+      setState(() {
+        _settings = Settings(
+          brand: brand ?? 'NSP',
+          fullscreen: fullscreen ?? false,
+          videoPath: videoPath ?? 'C:\\SSM\\',
+        );
       });
-    } else {
-      _videoManager.initialize('C:\\SSM\\NSP.mp4').then((value) {
-        setState(() {});
-      });
+    } catch (e) {
+      print('Ошибка загрузки настроек: $e');
+      _settings = Settings(
+        brand: 'NSP',
+        fullscreen: false,
+        videoPath: 'C:\\SSM\\',
+      );
     }
   }
 
-  // void _scheduleDailyVideoCheck() {
-  //   DateTime now = DateTime.now();
-  //   DateTime targetTime = DateTime(now.year, now.month, now.day, 9, 0);
-  //
-  //   if (now.isAfter(targetTime)) {
-  //     targetTime = targetTime.add(Duration(days: 1));
-  //   }
-  //
-  //   Duration initialDelay = targetTime.difference(now);
-  //
-  //   Timer(initialDelay, () {
-  //     if (_brend != null) {
-  //       _videoManager.checkAndUpdateVideo(_brend!);
-  //     }
-  //
-  //     Timer.periodic(Duration(hours: 24), (timer) {
-  //       if (_brend != null) {
-  //         _videoManager.checkAndUpdateVideo(_brend!);
-  //       }
-  //     });
-  //   });
-  // }
+  /// Сохраняет настройки в SharedPreferences
+  Future<void> _saveSettings() async {
+    try {
+      final prefs = await SharedPreferences.getInstance();
+      await prefs.setString('selectedBrand', _settings.brand);
+    } catch (e) {
+      print('Ошибка сохранения настроек: $e');
+    }
+  }
+
+  void _initFullScreen() async {
+    await windowManager.ensureInitialized();
+    await windowManager.setFullScreen(_settings.fullscreen);
+  }
+
+  void _initializeVideo() {
+    String videoPath = '${_settings.videoPath}\\${_settings.brand}.mp4';
+    if (_brend != null) {
+      videoPath = '${_settings.videoPath}\\${_settings.brand}.mp4';
+    }
+    _videoManager.initialize(videoPath).then((value) {
+      setState(() {});
+    });
+  }
 
   void _onDataReceived(dynamic message) {
     try {
@@ -105,9 +138,7 @@ class _SecondMonitorState extends State<SecondMonitor> {
           ? LoyaltyProgram.fromJson(jsonData['loyaltyProgram'])
           : null;
 
-      var summary = jsonData['summary'] != null
-          ? Summary.fromJson(jsonData['summary'])
-          : null;
+      var summary = jsonData['summary'] != null ? Summary.fromJson(jsonData['summary']) : null;
 
       var checkItems = jsonData['checkItems'] != null
           ? List<CheckItem>.from(
@@ -131,6 +162,8 @@ class _SecondMonitorState extends State<SecondMonitor> {
       } else {
         _videoManager.pause();
       }
+
+      _saveSettings();
     } catch (e) {
       log('SecondMonitor. Ошибка при обработке сообщения: $e');
     }
@@ -202,9 +235,9 @@ class _SecondMonitorState extends State<SecondMonitor> {
 
   Widget _buildBrendLogo() {
     String logoPath = 'assets/JNS.png';
+    String brendLogo = _settings.brand;
 
-    if (_brend != null) {
-      switch (_brend!.brendName) {
+      switch (brendLogo) {
         case 'ASP':
           logoPath = 'assets/ASP.png';
           break;
@@ -217,16 +250,15 @@ class _SecondMonitorState extends State<SecondMonitor> {
         case 'JNS':
           logoPath = 'assets/JNS.png';
           break;
-      }
+
     }
 
     return Image.asset(
-            logoPath,
-            width: 120,
-            height: 80,
+      logoPath,
+      width: 120,
+      height: 80,
     );
   }
-
 
   Widget _buildVideoPlayer() {
     return _videoManager.isInitialized
@@ -260,16 +292,16 @@ class _SecondMonitorState extends State<SecondMonitor> {
         children: [
           Text(
             'ПРОГРАММА ЛОЯЛЬНОСТИ',
-            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+            style: TextStyle(fontWeight: FontWeight.bold),
           ),
           SizedBox(height: 10),
           if (_loyaltyProgram != null) ...[
-            _buildLoyaltyItem('УРОВЕНЬ:', _loyaltyProgram!.level),
+            _buildLoyaltyItem('Уровень:', _loyaltyProgram!.level),
             _buildLoyaltyItem(
-                'КОЛИЧЕСТВО БОНУСОВ:', '${_loyaltyProgram!.bonusPoints}'),
-            _buildLoyaltyItem('ДО ПЕРЕХОДА НА СЛЕДУЮЩИЙ УРОВЕНЬ:',
+                'Количество баллов:', '${_loyaltyProgram!.bonusPoints}'),
+            _buildLoyaltyItem('До перехода на следующий уровень:',
                 '${_loyaltyProgram!.pointsToNextLevel}'),
-            _buildLoyaltyItem('СГОРАНИЕ БАЛОВ:', '${_loyaltyProgram!.dataEndBonus}')
+            _buildLoyaltyItem('Сгорание баллов:', '${_loyaltyProgram!.dataEndBonus}')
           ] else ...[
             Text('Загрузка...'),
           ],
@@ -278,16 +310,16 @@ class _SecondMonitorState extends State<SecondMonitor> {
     );
   }
 
-  Widget _buildLoyaltyItem(String label, String value, {bool isBold = true}) {
+  Widget _buildLoyaltyItem(String label, String value) {
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 3.0),
+      padding: const EdgeInsets.symmetric(vertical: 5.0),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Text(label),
           Text(
             value,
-            style: TextStyle(fontWeight: isBold ? FontWeight.bold : FontWeight.normal, fontSize: 14),
+            style: TextStyle(fontWeight: FontWeight.bold),
           ),
         ],
       ),
@@ -298,18 +330,45 @@ class _SecondMonitorState extends State<SecondMonitor> {
     return _paymentQRCode != null && _paymentQRCode!.qrCodeData.isNotEmpty
         ? Container(
       width: 150,
-      height: 200,
+      height: 250,
       decoration: BoxDecoration(
         color: Color(0xFFF2F2F2),
         borderRadius: BorderRadius.circular(15),
         border: Border.all(color: Colors.grey),
       ),
-      child: Center(
-        child: QrImageView(
-          data: _paymentQRCode!.qrCodeData,
-          size: 150.0,
-          errorCorrectionLevel: QrErrorCorrectLevel.H,
-        ),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Text(
+            'СБП',
+            style: TextStyle(
+              fontSize: 18,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          SizedBox(height: 8),
+          QrImageView(
+            data: _paymentQRCode!.qrCodeData,
+            size: 150.0,
+            errorCorrectionLevel: QrErrorCorrectLevel.H,
+          ),
+          SizedBox(height: 8),
+          Text(
+            'К оплате:',
+            style: TextStyle(
+              fontSize: 16,
+              fontWeight: FontWeight.normal,
+            ),
+          ),
+          SizedBox(height: 4),
+          Text(
+            '${_summary!.totalAmount}',
+            style: TextStyle(
+              fontSize: 16,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+        ],
       ),
     )
         : SizedBox.shrink();
@@ -327,18 +386,16 @@ class _SecondMonitorState extends State<SecondMonitor> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text('ИТОГО',
-            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
-          ),
-          SizedBox(height: 10),
+          _buildPaymentSummaryItem('ИТОГО', ''),
           if (_summary != null) ...[
             _buildPaymentSummaryItem(
-                'КОЛИЧЕСТВО ПОЗИЦИЙ:', '${_summary!.totalItems}'),
+                'Количество позиций:', '${_summary!.totalItems}'),
             _buildPaymentSummaryItem(
-                'СУММА СКИДКИ:', '${_summary!.discountAmount}'),
+                'Сумма скидки:', '${_summary!.discountAmount}'),
             _buildPaymentSummaryItem(
-                'ЗА ПОКУПКУ НАЧИСЛЯЕТСЯ:', '${_summary!.bonusForPurchase}'),
-            _buildPaymentSummaryItem('СУММА ЧЕКА:', '${_summary!.totalAmount}', isBold: true),
+                'За покупку начисляется:', '${_summary!.bonusForPurchase}'),
+            _buildPaymentSummaryItem('СУММА ЧЕКА:', '${_summary!.totalAmount}',
+                isBold: true),
           ] else ...[
             Text('Загрузка...'),
           ],
@@ -347,28 +404,26 @@ class _SecondMonitorState extends State<SecondMonitor> {
     );
   }
 
-  Widget _buildPaymentSummaryItem(String label, String value, {bool isBold = false, double fontSize = 14}) {
+  Widget _buildPaymentSummaryItem(String label, String value,
+      {bool isBold = false}) {
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 3.0),
+      padding: const EdgeInsets.symmetric(vertical: 5.0),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Text(
-            label,
-            style: TextStyle(fontWeight: isBold ? FontWeight.bold : FontWeight.normal, fontSize: fontSize),
-          ),
+          Text(label),
           Text(
             value,
-            style: TextStyle(fontWeight: isBold ? FontWeight.bold : FontWeight.normal, fontSize: fontSize),
+            style: TextStyle(
+                fontWeight: isBold ? FontWeight.bold : FontWeight.normal),
           ),
         ],
       ),
     );
   }
 
-
   Widget _buildItemsTable() {
-    return Expanded(
+    return Expanded( // Заменяем Container на Expanded
       child: Container(
         decoration: BoxDecoration(
           border: Border.all(color: Colors.grey),
@@ -412,8 +467,4 @@ class _SecondMonitorState extends State<SecondMonitor> {
       ),
     );
   }
-}
-
-extension on Display {
-  get bounds => null;
 }
