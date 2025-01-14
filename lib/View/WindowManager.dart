@@ -12,9 +12,10 @@ class SettingsWindow extends StatefulWidget {
 }
 
 class _SettingsWindowState extends State<SettingsWindow> {
-  late bool isFullScreen;
-  late String selectedBrand;
-  late String videoFolder;
+  bool isFullScreen = false; // Значение по умолчанию
+  String selectedBrand = 'SP'; // Значение по умолчанию
+  String videoFolder = ''; // Пустое значение по умолчанию
+  bool isLoading = true; // Флаг загрузки настроек
   final List<String> availableBrands = ['SP', 'ASP', 'NSP', 'JNS'];
   Timer? _inactivityTimer;
   static const int inactivityDuration = 30; // Время бездействия в секундах.
@@ -40,6 +41,7 @@ class _SettingsWindowState extends State<SettingsWindow> {
       isFullScreen = settings.isFullScreen;
       selectedBrand = settings.selectedBrand;
       videoFolder = settings.videoFolder;
+      isLoading = false; // Настройки загружены
     });
   }
 
@@ -94,6 +96,12 @@ class _SettingsWindowState extends State<SettingsWindow> {
 
   @override
   Widget build(BuildContext context) {
+    if (isLoading) {
+      return const Scaffold(
+        body: Center(child: CircularProgressIndicator()),
+      );
+    }
+
     return GestureDetector(
       behavior: HitTestBehavior.translucent,
       onTap: _resetInactivityTimer,

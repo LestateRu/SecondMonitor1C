@@ -686,3 +686,48 @@ Tried calling: left
 2024-12-11 16:03:45.318567: WebSocketServer. Клиент WebSocket подключен.
 2024-12-11 16:03:45.541267: After Init
 2024-12-11 16:03:45.542084: VideoManager. Video initialized.
+2025-01-14 18:06:21.143892: WebSocketServer. HTTP сервер запущен на http://localhost:4001/api/
+2025-01-14 18:06:21.215997: WebSocketServer. WebSocket сервер запущен на ws://localhost:4002/ws/
+2025-01-14 18:06:21.226370: C:\SSM\NSP.mp4
+2025-01-14 18:06:21.227343: After initialize file
+2025-01-14 18:06:21.237334: after path
+2025-01-14 18:06:21.251731: Start initialaze
+2025-01-14 18:06:21.462921: WebSocketServer. Клиент WebSocket подключен.
+2025-01-14 18:06:21.624638: After Init
+2025-01-14 18:06:21.625639: VideoManager. Video initialized.
+2025-01-14 18:42:29.747989: WebSocketServer. HTTP сервер запущен на http://localhost:4001/api/
+2025-01-14 18:42:29.759890: WebSocketServer. WebSocket сервер запущен на ws://localhost:4002/ws/
+2025-01-14 18:42:29.771265: C:\SSM\NSP.mp4
+2025-01-14 18:42:29.775371: After initialize file
+2025-01-14 18:42:29.783691: after path
+2025-01-14 18:42:29.792109: Start initialaze
+2025-01-14 18:42:29.891024: WebSocketServer. Клиент WebSocket подключен.
+2025-01-14 18:42:30.015003: After Init
+2025-01-14 18:42:30.015999: VideoManager. Video initialized.
+2025-01-14 18:48:18.661712: WebSocketServer. HTTP сервер запущен на http://localhost:4001/api/
+2025-01-14 18:48:18.669718: WebSocketServer. WebSocket сервер запущен на ws://localhost:4002/ws/
+2025-01-14 18:48:18.682712: C:\SSM\NSP.mp4
+2025-01-14 18:48:18.687357: After initialize file
+2025-01-14 18:48:18.697807: after path
+2025-01-14 18:48:18.705836: Start initialaze
+2025-01-14 18:48:29.974302: After Init
+2025-01-14 18:48:29.975329: VideoManager. Video initialized.
+2025-01-14 18:48:34.954575: WebSocketServer. Клиент WebSocket подключен.
+2025-01-14 18:57:54.262995: WebSocketServer. HTTP сервер запущен на http://localhost:4001/api/
+2025-01-14 18:57:54.270892: WebSocketServer. WebSocket сервер запущен на ws://localhost:4002/ws/
+2025-01-14 18:57:54.284892: C:\SSM\NSP.mp4
+2025-01-14 18:57:54.289891: After initialize file
+2025-01-14 18:57:54.301164: after path
+2025-01-14 18:57:54.311220: Start initialaze
+2025-01-14 18:57:54.442054: WebSocketServer. Клиент WebSocket подключен.
+2025-01-14 18:57:54.579464: After Init
+2025-01-14 18:57:54.580480: VideoManager. Video initialized.
+2025-01-14 19:01:49.231755: WebSocketServer. HTTP сервер запущен на http://localhost:4001/api/
+2025-01-14 19:01:49.239786: WebSocketServer. WebSocket сервер запущен на ws://localhost:4002/ws/
+2025-01-14 19:01:49.250840: C:\SSM\NSP.mp4
+2025-01-14 19:01:49.253862: After initialize file
+2025-01-14 19:01:49.265864: after path
+2025-01-14 19:01:49.277396: Start initialaze
+2025-01-14 19:02:02.458796: WebSocketServer. Клиент WebSocket подключен.
+2025-01-14 19:02:02.472867: After Init
+2025-01-14 19:02:02.472867: VideoManager. Video initialized.

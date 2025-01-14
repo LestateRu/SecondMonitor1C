@@ -4,6 +4,7 @@ import 'dart:convert';
 import 'dart:io';
 import 'package:path_provider/path_provider.dart';
 import 'package:process_run/shell.dart';
+import 'package:second_monitor/Service/ScreenManager.dart';
 import 'package:second_monitor/View/second_monitor.dart';
 import 'package:second_monitor/Service/logger.dart';
 import 'package:window_manager/window_manager.dart';
@@ -12,9 +13,19 @@ import 'package:second_monitor/Service/AppSettings.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-
   // Инициализация Window Manager
   await windowManager.ensureInitialized();
+
+  WindowOptions windowOptions = WindowOptions(
+    size: const Size(800, 600),
+    center: true,
+    backgroundColor: Colors.transparent,
+    skipTaskbar: false,
+  );
+  windowManager.waitUntilReadyToShow(windowOptions, () async {
+    await windowManager.show();
+    await windowManager.focus();
+  });
 
   // Настройка окна настроек
   windowManager.waitUntilReadyToShow().then((_) async {
@@ -39,8 +50,6 @@ class SettingsApp extends StatelessWidget {
     );
   }
 }
-
-
 
 class MyApp extends StatelessWidget {
   final Future<bool> _updateCheckFuture = _checkForUpdateWindows();

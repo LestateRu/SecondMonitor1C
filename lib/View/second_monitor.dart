@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 import 'package:path_provider/path_provider.dart';
 import 'package:screen_retriever/screen_retriever.dart';
+import 'package:second_monitor/Service/ScreenManager.dart';
 import 'package:second_monitor/Service/VideoManager.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:window_manager/window_manager.dart';
@@ -111,6 +112,8 @@ class _SecondMonitorState extends State<SecondMonitor> {
 
   void _initFullScreen() async {
     await windowManager.ensureInitialized();
+    final screenManager = ScreenManager();
+    await screenManager.moveToSecondScreen();
     await windowManager.setFullScreen(_settings.fullscreen);
   }
 
