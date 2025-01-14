@@ -731,3 +731,79 @@ Tried calling: left
 2025-01-14 19:02:02.458796: WebSocketServer. Клиент WebSocket подключен.
 2025-01-14 19:02:02.472867: After Init
 2025-01-14 19:02:02.472867: VideoManager. Video initialized.
+2025-01-14 19:53:30.092594: WebSocketServer. HTTP сервер запущен на http://localhost:4001/api/
+2025-01-14 19:53:30.106650: WebSocketServer. WebSocket сервер запущен на ws://localhost:4002/ws/
+2025-01-14 19:53:30.114811: Initializing video from https://sportpoint.ru/upload/SecondMonitor/NSP.mp4
+2025-01-14 19:53:30.123925: Downloading video...
+2025-01-14 19:53:30.208147: WebSocketServer. Клиент WebSocket подключен.
+2025-01-14 19:53:31.468403: Error downloading video: Exception: Failed to download video: 403
+2025-01-14 19:53:31.469722: Initializing video controller...
+2025-01-14 19:53:31.529107: Playing video...
+2025-01-14 19:53:31.530111: Video initialized successfully.
+2025-01-14 19:56:35.271166: WebSocketServer. HTTP сервер запущен на http://localhost:4001/api/
+2025-01-14 19:56:35.277124: WebSocketServer. WebSocket сервер запущен на ws://localhost:4002/ws/
+2025-01-14 19:56:35.288127: Initializing video from https://sportpoint.ru/upload/SecondMonitor/NSP.mp4
+2025-01-14 19:56:35.302590: Downloading video...
+2025-01-14 19:56:35.365486: WebSocketServer. Клиент WebSocket подключен.
+2025-01-14 19:56:36.617263: Error downloading video: Exception: Failed to download video: 403
+2025-01-14 19:56:36.621261: Initializing video controller...
+2025-01-14 19:56:36.655674: Playing video...
+2025-01-14 19:56:36.663802: Video initialized successfully.
+2025-01-14 20:02:57.908399: WebSocketServer. HTTP сервер запущен на http://localhost:4001/api/
+2025-01-14 20:02:57.913383: WebSocketServer. WebSocket сервер запущен на ws://localhost:4002/ws/
+2025-01-14 20:03:21.376364: Initializing video from https://sportpoint.ru/upload/SecondMonitor/NSP.mp4
+2025-01-14 20:04:40.385619: Downloading video...
+2025-01-14 20:04:43.082053: WebSocketServer. Клиент WebSocket подключен.
+2025-01-14 20:05:41.559897: WebSocketServer. Ошибка при запуске серверов: SocketException: Failed to create server socket (OS Error: The shared flag to bind() needs to be `true` if binding multiple times on the same (address, port) combination.), address = 127.0.0.1, port = 4001
+2025-01-14 20:05:47.409170: Initializing video from https://sportpoint.ru/upload/SecondMonitor/NSP.mp4
+2025-01-14 20:06:03.231186: Downloading video...
+2025-01-14 20:06:13.605932: Error downloading video: HandshakeException: Connection terminated during handshake
+2025-01-14 20:06:47.775259: Initializing video controller...
+2025-01-14 20:06:59.174388: WebSocketServer. Клиент WebSocket подключен.
+2025-01-14 20:07:29.076574: Playing video...
+2025-01-14 20:07:29.077683: Video initialized successfully.
+2025-01-14 20:08:12.984177: WebSocketService. WebSocket connection closed
+2025-01-14 20:08:14.641014: Playing video...
+2025-01-14 20:15:48.753677: Error downloading video: Exception: Failed to download video: 403
+2025-01-14 20:21:04.233304: WebSocketServer. HTTP сервер запущен на http://localhost:4001/api/
+2025-01-14 20:21:04.239633: WebSocketServer. WebSocket сервер запущен на ws://localhost:4002/ws/
+2025-01-14 20:21:37.005560: Initializing video from https://sportpoint.ru/upload/SecondMonitor/NSP.mp4
+2025-01-14 20:21:37.028622: Downloading video...
+2025-01-14 20:22:00.624252: WebSocketServer. Клиент WebSocket подключен.
+2025-01-14 20:22:00.693994: WebSocketServer. Ошибка при запуске серверов: SocketException: Failed to create server socket (OS Error: The shared flag to bind() needs to be `true` if binding multiple times on the same (address, port) combination.), address = 127.0.0.1, port = 4001
+2025-01-14 20:22:03.458825: Initializing video from https://sportpoint.ru/upload/SecondMonitor/NSP.mp4
+2025-01-14 20:22:03.527161: Downloading video...
+2025-01-14 20:22:07.620283: WebSocketServer. Клиент WebSocket подключен.
+2025-01-14 20:43:25.482017: Error downloading video: Exception: Failed to download video: 403
+2025-01-14 20:44:24.658679: WebSocketServer. HTTP сервер запущен на http://localhost:4001/api/
+2025-01-14 20:44:24.663569: WebSocketServer. WebSocket сервер запущен на ws://localhost:4002/ws/
+2025-01-14 20:44:34.255061: Initializing video from https://sportpoint.ru/upload/SecondMonitor/NSP.mp4
+2025-01-14 20:44:34.269090: Downloading video...
+2025-01-14 20:44:41.720869: WebSocketServer. Клиент WebSocket подключен.
+2025-01-14 20:45:02.909900: Error downloading video: Exception: Failed to download video: 403
+2025-01-14 20:45:02.912364: Initializing video controller...
+2025-01-14 20:45:41.747760: WebSocketServer. HTTP сервер запущен на http://localhost:4001/api/
+2025-01-14 20:45:41.753766: WebSocketServer. WebSocket сервер запущен на ws://localhost:4002/ws/
+2025-01-14 20:45:41.767880: Initializing video from https://sportpoint.ru/upload/SecondMonitor/NSP.mp4
+2025-01-14 20:45:41.782480: Downloading video...
+2025-01-14 20:45:57.288161: WebSocketServer. Клиент WebSocket подключен.
+2025-01-14 20:58:34.595264: Error downloading video: Exception: Failed to download video: 403
+2025-01-14 20:58:34.597266: Initializing video controller...
+2025-01-14 20:58:38.711593: WebSocketServer. HTTP сервер запущен на http://localhost:4001/api/
+2025-01-14 20:58:38.716976: WebSocketServer. WebSocket сервер запущен на ws://localhost:4002/ws/
+2025-01-14 20:58:38.729983: Initializing video from URL: https://sportpoint.ru/upload/SecondMonitor/NSP.mp4
+2025-01-14 20:58:38.795952: WebSocketServer. Клиент WebSocket подключен.
+2025-01-14 20:58:47.752776: Video initialized successfully.
+2025-01-14 20:58:47.752776: Playing video...
+2025-01-14 21:05:33.599620: WebSocketServer. HTTP сервер запущен на http://localhost:4001/api/
+2025-01-14 21:05:33.604673: WebSocketServer. WebSocket сервер запущен на ws://localhost:4002/ws/
+2025-01-14 21:05:33.617673: Initializing video from URL: https://sportpoint.ru/upload/SecondMonitor/NSP.mp4
+2025-01-14 21:05:33.685677: WebSocketServer. Клиент WebSocket подключен.
+2025-01-14 21:05:51.938730: Video initialized successfully.
+2025-01-14 21:05:51.938730: Playing video...
+2025-01-14 21:37:10.672870: WebSocketServer. HTTP сервер запущен на http://localhost:4001/api/
+2025-01-14 21:37:10.681047: WebSocketServer. WebSocket сервер запущен на ws://localhost:4002/ws/
+2025-01-14 21:37:10.695089: Initializing video from URL: https://sportpoint.ru/upload/SecondMonitor/NSP.mp4
+2025-01-14 21:37:10.795504: WebSocketServer. Клиент WebSocket подключен.
+2025-01-14 21:37:14.832517: Video initialized successfully.
+2025-01-14 21:37:14.832517: Playing video...

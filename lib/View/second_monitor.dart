@@ -117,15 +117,14 @@ class _SecondMonitorState extends State<SecondMonitor> {
     await windowManager.setFullScreen(_settings.fullscreen);
   }
 
+
   void _initializeVideo() {
-    String videoPath = '${_settings.videoPath}\\${_settings.brand}.mp4';
-    if (_brend != null) {
-      videoPath = '${_settings.videoPath}\\${_settings.brand}.mp4';
-    }
-    _videoManager.initialize(videoPath).then((value) {
+    String videoUrl = 'https://sportpoint.ru/upload/SecondMonitor/${_settings.brand}.mp4';
+    _videoManager.initialize(videoUrl).then((_) {
       setState(() {});
     });
   }
+
 
   void _onDataReceived(dynamic message) {
     try {
