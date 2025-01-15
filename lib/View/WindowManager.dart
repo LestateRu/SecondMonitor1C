@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:file_picker/file_picker.dart'; // Импортируем пакет для выбора файлов и папок
+import 'package:file_picker/file_picker.dart'; // Импортируем пакет для выбора файлов
 import 'second_monitor.dart'; // Подключаем SecondMonitor
 import 'package:second_monitor/Service/AppSettings.dart'; // Импортируем класс для работы с настройками
 import 'dart:async';
@@ -14,7 +14,8 @@ class SettingsWindow extends StatefulWidget {
 class _SettingsWindowState extends State<SettingsWindow> {
   bool isFullScreen = false; // Значение по умолчанию
   String selectedBrand = 'SP'; // Значение по умолчанию
-  String videoFolder = ''; // Пустое значение по умолчанию
+  String videoFilePath = ''; // Пустое значение по умолчанию
+  bool isVideoFromInternet = true; // Значение по умолчанию
   bool isLoading = true; // Флаг загрузки настроек
   final List<String> availableBrands = ['SP', 'ASP', 'NSP', 'JNS'];
   Timer? _inactivityTimer;
@@ -40,7 +41,8 @@ class _SettingsWindowState extends State<SettingsWindow> {
     setState(() {
       isFullScreen = settings.isFullScreen;
       selectedBrand = settings.selectedBrand;
-      videoFolder = settings.videoFolder;
+      videoFilePath = settings.videoFilePath;
+      isVideoFromInternet = settings.isVideoFromInternet;
       isLoading = false; // Настройки загружены
     });
   }
@@ -50,20 +52,21 @@ class _SettingsWindowState extends State<SettingsWindow> {
     AppSettings settings = AppSettings(
       isFullScreen: isFullScreen,
       selectedBrand: selectedBrand,
-      videoFolder: videoFolder,
+      videoFilePath: videoFilePath,
+      isVideoFromInternet: isVideoFromInternet,
     );
     settings.saveSettings();
   }
 
-  // Метод для выбора папки
-  Future<void> _selectFolder() async {
-    // Открываем диалог выбора папки
-    String? selectedDirectory = await FilePicker.platform.getDirectoryPath();
+  // Метод для выбора видеофайла
+  Future<void> _selectVideoFile() async {
+    FilePickerResult? result = await FilePicker.platform.pickFiles(
+      type: FileType.video,
+    );
 
-    // Если пользователь выбрал папку, обновляем состояние
-    if (selectedDirectory != null) {
+    if (result != null) {
       setState(() {
-        videoFolder = selectedDirectory;
+        videoFilePath = result.files.single.path!;
       });
       _saveSettings(); // Сохраняем настройки после изменения
       _resetInactivityTimer();
@@ -119,7 +122,7 @@ class _SettingsWindowState extends State<SettingsWindow> {
                   setState(() {
                     isFullScreen = value;
                   });
-                  _saveSettings(); // Сохраняем настройки после изменения
+                  _saveSettings();
                   _resetInactivityTimer();
                 },
               ),
@@ -140,7 +143,7 @@ class _SettingsWindowState extends State<SettingsWindow> {
                         setState(() {
                           selectedBrand = newValue!;
                         });
-                        _saveSettings(); // Сохраняем настройки после изменения
+                        _saveSettings();
                         _resetInactivityTimer();
                       },
                       items: availableBrands.map<DropdownMenuItem<String>>((String brand) {
@@ -153,12 +156,24 @@ class _SettingsWindowState extends State<SettingsWindow> {
                   ),
                 ],
               ),
-              TextField(
-                decoration: InputDecoration(labelText: 'Папка для видеофайлов'),
-                controller: TextEditingController(text: videoFolder),
-                readOnly: true, // Сделать поле только для чтения
-                onTap: _selectFolder, // Открыть диалог выбора папки
+              SwitchListTile(
+                title: const Text('Видео воспроизводится из интернета'),
+                value: isVideoFromInternet,
+                onChanged: (value) {
+                  setState(() {
+                    isVideoFromInternet = value;
+                  });
+                  _saveSettings();
+                  _resetInactivityTimer();
+                },
               ),
+              if (!isVideoFromInternet)
+                TextField(
+                  decoration: InputDecoration(labelText: 'Путь к видеофайлу'),
+                  controller: TextEditingController(text: videoFilePath),
+                  readOnly: true,
+                  onTap: _selectVideoFile,
+                ),
               const Spacer(),
               ElevatedButton(
                 onPressed: () => _launchSecondMonitor(context),

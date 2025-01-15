@@ -22,15 +22,17 @@ import 'package:second_monitor/Service/Server.dart';
 class Settings {
   String brand;
   bool fullscreen;
-  String videoPath;
+  String videoFilePath;
+  bool isVideoFromInternet;
 
-  Settings({required this.brand, required this.fullscreen, required this.videoPath});
+  Settings({required this.brand, required this.fullscreen, required this.videoFilePath, required this.isVideoFromInternet});
 
   factory Settings.fromJson(Map<String, dynamic> json) {
     return Settings(
       brand: json['brand'] ?? 'SP',
       fullscreen: json['fullscreen'] ?? false,
-      videoPath: json['videoPath'] ?? 'C:\\SSM\\',
+      videoFilePath: json['videoFilePath'] ?? 'C:\\SSM\\',
+      isVideoFromInternet: json['isVideoFromInternet'] ?? true
     );
   }
 
@@ -38,7 +40,8 @@ class Settings {
     return {
       'brand': brand,
       'fullscreen': fullscreen,
-      'videoPath': videoPath,
+      'videoFilePath': videoFilePath,
+      'isVideoFromInternet': isVideoFromInternet
     };
   }
 }
@@ -81,13 +84,15 @@ class _SecondMonitorState extends State<SecondMonitor> {
       final prefs = await SharedPreferences.getInstance();
       String? brand = prefs.getString('selectedBrand');
       bool? fullscreen = prefs.getBool('isFullScreen');
-      String? videoPath = prefs.getString('videoFolder');
+      String? videoFilePath = prefs.getString('videoFilePath');
+      bool? isVideoFromInternet = prefs.getBool('isVideoFromInternet');
 
       setState(() {
         _settings = Settings(
           brand: brand ?? 'NSP',
           fullscreen: fullscreen ?? false,
-          videoPath: videoPath ?? 'C:\\SSM\\',
+          videoFilePath: videoFilePath ?? 'C:\\SSM\\NSP.mp4',
+          isVideoFromInternet: isVideoFromInternet ?? true
         );
       });
     } catch (e) {
@@ -95,7 +100,8 @@ class _SecondMonitorState extends State<SecondMonitor> {
       _settings = Settings(
         brand: 'NSP',
         fullscreen: false,
-        videoPath: 'C:\\SSM\\',
+        videoFilePath: 'C:\\SSM\\NSP.mp4',
+        isVideoFromInternet: true
       );
     }
   }
@@ -119,11 +125,24 @@ class _SecondMonitorState extends State<SecondMonitor> {
 
 
   void _initializeVideo() {
-    String videoUrl = 'https://sportpoint.ru/upload/SecondMonitor/${_settings.brand}.mp4';
-    _videoManager.initialize(videoUrl).then((_) {
-      setState(() {});
-    });
+    if (_settings.isVideoFromInternet) {
+      String videoUrl = 'https://sportpoint.ru/upload/SecondMonitor/${_settings.brand}.mp4';
+      _videoManager.initialize(
+        isVideoFromInternet: true,
+        videoSource: videoUrl,
+      ).then((_) {
+        setState(() {});
+      });;
+    } else {
+      _videoManager.initialize(
+        isVideoFromInternet: false,
+        videoSource: _settings.videoFilePath,
+      ).then((_) {
+        setState(() {});
+      });
+    }
   }
+
 
 
   void _onDataReceived(dynamic message) {

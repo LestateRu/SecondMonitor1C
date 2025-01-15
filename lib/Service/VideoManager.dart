@@ -9,14 +9,23 @@ class VideoManager {
   late WinVideoPlayerController _videoController;
   bool _isInitialized = false;
 
-  Future<void> initialize(String videoUrl) async {
+  Future<void> initialize({
+    required bool isVideoFromInternet,
+    required String videoSource,
+  }) async {
     try {
-      log('Initializing video from URL: $videoUrl');
+      log('Initializing video from ${isVideoFromInternet ? "URL" : "local file"}: $videoSource');
 
-      // Используем URL для воспроизведения
-      _videoController = WinVideoPlayerController.network(videoUrl);
+      if (isVideoFromInternet) {
+        // Используем URL для воспроизведения
+        _videoController = WinVideoPlayerController.network(videoSource);
+      } else {
+        // Используем локальный файл
+        final videoFile = File(videoSource);
+        _videoController = WinVideoPlayerController.file(videoFile);
+      }
+
       await _videoController.initialize();
-
       _isInitialized = true;
 
       _videoController.addListener(() {
@@ -26,7 +35,7 @@ class VideoManager {
       });
 
       log('Video initialized successfully.');
-      play();  // Воспроизводим видео
+      play();
     } catch (error) {
       log('Error initializing video: $error');
     }

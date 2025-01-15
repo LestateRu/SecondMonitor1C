@@ -19,11 +19,6 @@ class ScreenManager {
       await windowManager.setAlwaysOnTop(false);
       //await windowManager.setFullScreen(true);
     } else {
-    final secondScreen = screens[0];
-    final bounds = secondScreen.visiblePosition;
-
-    await windowManager.setPosition(bounds!);
-    await windowManager.setAlwaysOnTop(false);
       print('Второй экран не найден. Окно останется на текущем экране.');
     }
   }
