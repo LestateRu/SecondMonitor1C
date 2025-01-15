@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:file_picker/file_picker.dart'; // Импортируем пакет для выбора файлов
-import 'second_monitor.dart'; // Подключаем SecondMonitor
-import 'package:second_monitor/Service/AppSettings.dart'; // Импортируем класс для работы с настройками
+import 'package:file_picker/file_picker.dart';
+import 'second_monitor.dart';
+import 'package:second_monitor/Service/AppSettings.dart';
 import 'dart:async';
 
 class SettingsWindow extends StatefulWidget {
@@ -12,14 +12,14 @@ class SettingsWindow extends StatefulWidget {
 }
 
 class _SettingsWindowState extends State<SettingsWindow> {
-  bool isFullScreen = false; // Значение по умолчанию
-  String selectedBrand = 'SP'; // Значение по умолчанию
-  String videoFilePath = ''; // Пустое значение по умолчанию
-  bool isVideoFromInternet = true; // Значение по умолчанию
-  bool isLoading = true; // Флаг загрузки настроек
+  bool isFullScreen = false;
+  String selectedBrand = 'SP';
+  String videoFilePath = '';
+  bool isVideoFromInternet = true;
+  bool isLoading = true;
   final List<String> availableBrands = ['SP', 'ASP', 'NSP', 'JNS'];
   Timer? _inactivityTimer;
-  static const int inactivityDuration = 30; // Время бездействия в секундах.
+  static const int inactivityDuration = 30;
   bool _userInteracted = false;
 
   @override
@@ -35,7 +35,6 @@ class _SettingsWindowState extends State<SettingsWindow> {
     super.dispose();
   }
 
-  // Загрузка настроек
   void _loadSettings() async {
     AppSettings settings = await AppSettings.loadSettings();
     setState(() {
@@ -43,11 +42,10 @@ class _SettingsWindowState extends State<SettingsWindow> {
       selectedBrand = settings.selectedBrand;
       videoFilePath = settings.videoFilePath;
       isVideoFromInternet = settings.isVideoFromInternet;
-      isLoading = false; // Настройки загружены
+      isLoading = false;
     });
   }
 
-  // Метод для сохранения настроек
   void _saveSettings() {
     AppSettings settings = AppSettings(
       isFullScreen: isFullScreen,
@@ -58,7 +56,6 @@ class _SettingsWindowState extends State<SettingsWindow> {
     settings.saveSettings();
   }
 
-  // Метод для выбора видеофайла
   Future<void> _selectVideoFile() async {
     FilePickerResult? result = await FilePicker.platform.pickFiles(
       type: FileType.video,
@@ -68,12 +65,11 @@ class _SettingsWindowState extends State<SettingsWindow> {
       setState(() {
         videoFilePath = result.files.single.path!;
       });
-      _saveSettings(); // Сохраняем настройки после изменения
+      _saveSettings();
       _resetInactivityTimer();
     }
   }
 
-  // Таймер бездействия
   void _startInactivityTimer() {
     _inactivityTimer?.cancel();
     _inactivityTimer = Timer(Duration(seconds: inactivityDuration), () {
@@ -88,9 +84,8 @@ class _SettingsWindowState extends State<SettingsWindow> {
     _startInactivityTimer();
   }
 
-  // Метод для запуска второго монитора
   void _launchSecondMonitor(BuildContext context) {
-    _saveSettings(); // Сохраняем настройки перед запуском
+    _saveSettings();
     Navigator.pushReplacement(
       context,
       MaterialPageRoute(builder: (context) => SecondMonitor()),

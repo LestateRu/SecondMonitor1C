@@ -1,7 +1,4 @@
 import 'dart:convert';
-import 'dart:io';
-import 'package:path_provider/path_provider.dart';
-import 'package:screen_retriever/screen_retriever.dart';
 import 'package:second_monitor/Service/ScreenManager.dart';
 import 'package:second_monitor/Service/VideoManager.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -78,7 +75,6 @@ class _SecondMonitorState extends State<SecondMonitor> {
     _initFullScreen();});
   }
 
-  /// Загружает настройки из SharedPreferences
   Future<void> _loadSettings() async {
     try {
       final prefs = await SharedPreferences.getInstance();
@@ -106,7 +102,6 @@ class _SecondMonitorState extends State<SecondMonitor> {
     }
   }
 
-  /// Сохраняет настройки в SharedPreferences
   Future<void> _saveSettings() async {
     try {
       final prefs = await SharedPreferences.getInstance();
@@ -122,7 +117,6 @@ class _SecondMonitorState extends State<SecondMonitor> {
     await screenManager.moveToSecondScreen();
     await windowManager.setFullScreen(_settings.fullscreen);
   }
-
 
   void _initializeVideo() {
     if (_settings.isVideoFromInternet) {
@@ -142,8 +136,6 @@ class _SecondMonitorState extends State<SecondMonitor> {
       });
     }
   }
-
-
 
   void _onDataReceived(dynamic message) {
     try {
@@ -288,7 +280,7 @@ class _SecondMonitorState extends State<SecondMonitor> {
       height: double.infinity,
       color: Colors.black,
       child: FittedBox(
-        fit: BoxFit.contain,
+        fit: BoxFit.cover,
         child: SizedBox(
           width: _videoManager.controller.value.size.width,
           height: _videoManager.controller.value.size.height,
@@ -444,7 +436,7 @@ class _SecondMonitorState extends State<SecondMonitor> {
   }
 
   Widget _buildItemsTable() {
-    return Expanded( // Заменяем Container на Expanded
+    return Expanded(
       child: Container(
         decoration: BoxDecoration(
           border: Border.all(color: Colors.grey),

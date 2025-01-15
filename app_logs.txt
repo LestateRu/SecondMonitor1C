@@ -928,3 +928,28 @@ Tried calling: left
 2025-01-15 15:06:35.903180: WebSocketServer. Клиент WebSocket подключен.
 2025-01-15 15:06:36.038579: Video initialized successfully.
 2025-01-15 15:06:36.038579: Playing video...
+2025-01-15 18:21:29.433972: WebSocketServer. HTTP сервер запущен на http://localhost:4001/api/
+2025-01-15 18:21:29.457924: WebSocketServer. WebSocket сервер запущен на ws://localhost:4002/ws/
+2025-01-15 18:21:29.464925: Initializing video from URL: https://sportpoint.ru/upload/SecondMonitor/NSP.mp4
+2025-01-15 18:21:29.533586: WebSocketServer. Клиент WebSocket подключен.
+2025-01-15 18:21:29.534586: Второй экран не найден. Окно останется на текущем экране.
+2025-01-15 18:21:32.831005: Video initialized successfully.
+2025-01-15 18:21:32.832511: Playing video...
+2025-01-15 18:23:18.251820: WebSocketServer. HTTP сервер запущен на http://localhost:4001/api/
+2025-01-15 18:23:18.258820: WebSocketServer. WebSocket сервер запущен на ws://localhost:4002/ws/
+2025-01-15 18:23:18.267820: Initializing video from URL: https://sportpoint.ru/upload/SecondMonitor/NSP.mp4
+2025-01-15 18:23:18.329798: Второй экран не найден. Окно останется на текущем экране.
+2025-01-15 18:23:18.343795: WebSocketServer. Клиент WebSocket подключен.
+2025-01-15 18:23:22.277147: Video initialized successfully.
+2025-01-15 18:23:22.278652: Playing video...
+2025-01-15 18:24:17.464381: Playing video...
+2025-01-15 18:24:17.465407: Playing video...
+2025-01-15 18:31:58.442760: WebSocketServer. HTTP сервер запущен на http://localhost:4001/api/
+2025-01-15 18:31:58.451186: WebSocketServer. WebSocket сервер запущен на ws://localhost:4002/ws/
+2025-01-15 18:31:58.457697: Initializing video from URL: https://sportpoint.ru/upload/SecondMonitor/NSP.mp4
+2025-01-15 18:31:58.531307: Второй экран не найден. Окно останется на текущем экране.
+2025-01-15 18:31:58.544700: WebSocketServer. Клиент WebSocket подключен.
+2025-01-15 18:32:01.792418: Video initialized successfully.
+2025-01-15 18:32:01.792942: Playing video...
+2025-01-15 18:32:56.934307: Playing video...
+2025-01-15 18:32:56.994661: Playing video...

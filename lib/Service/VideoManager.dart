@@ -1,7 +1,5 @@
 import 'dart:io';
 import 'dart:async';
-import 'package:http/http.dart' as http;
-import 'package:path_provider/path_provider.dart'; // Для получения локального пути
 import 'package:video_player_win/video_player_win.dart';
 import 'package:second_monitor/Service/logger.dart';
 
@@ -17,10 +15,8 @@ class VideoManager {
       log('Initializing video from ${isVideoFromInternet ? "URL" : "local file"}: $videoSource');
 
       if (isVideoFromInternet) {
-        // Используем URL для воспроизведения
         _videoController = WinVideoPlayerController.network(videoSource);
       } else {
-        // Используем локальный файл
         final videoFile = File(videoSource);
         _videoController = WinVideoPlayerController.file(videoFile);
       }
